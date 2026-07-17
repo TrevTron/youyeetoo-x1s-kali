@@ -1,0 +1,52 @@
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-07-16 20:20 PDT
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00010s latency).
+
+PORT     STATE SERVICE VERSION
+8008/tcp open  http    X1SLocalLab/1.0 
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8008-TCP:V=7.95%I=7%D=7/16%Time=6A599F77%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,122,"HTTP/1\.0\x20200\x20OK\r\nServer:\x20X1SLocalLab/1\.0\x20
+SF:\r\nDate:\x20Fri,\x2017\x20Jul\x202026\x2003:20:23\x20GMT\r\nContent-Ty
+SF:pe:\x20text/html;\x20charset=utf-8\r\nContent-Length:\x20147\r\n\r\n<h1
+SF:>X1S\x20local\x20security\x20lab</h1><p>Intentionally\x20vulnerable\x20
+SF:and\x20bound\x20to\x20loopback\x20only\.</p><a\x20href='/admin/'>Admin<
+SF:/a>\x20<a\x20href='/item\?id=1'>Item</a>")%r(FourOhFourRequest,9E,"HTTP
+SF:/1\.0\x20404\x20Not\x20Found\r\nServer:\x20X1SLocalLab/1\.0\x20\r\nDate
+SF::\x20Fri,\x2017\x20Jul\x202026\x2003:20:23\x20GMT\r\nContent-Type:\x20t
+SF:ext/plain;\x20charset=utf-8\r\nContent-Length:\x209\r\n\r\nNot\x20found
+SF:")%r(Socks5,18B,"<!DOCTYPE\x20HTML>\n<html\x20lang=\"en\">\n\x20\x20\x2
+SF:0\x20<head>\n\x20\x20\x20\x20\x20\x20\x20\x20<meta\x20charset=\"utf-8\"
+SF:>\n\x20\x20\x20\x20\x20\x20\x20\x20<title>Error\x20response</title>\n\x
+SF:20\x20\x20\x20</head>\n\x20\x20\x20\x20<body>\n\x20\x20\x20\x20\x20\x20
+SF:\x20\x20<h1>Error\x20response</h1>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>
+SF:Error\x20code:\x20400</p>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>Message:\
+SF:x20Bad\x20request\x20syntax\x20\('\\x05\\x04\\x00\\x01\\x02\\x80\\x05\\
+SF:x01\\x00\\x03'\)\.</p>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>Error\x20cod
+SF:e\x20explanation:\x20400\x20-\x20Bad\x20request\x20syntax\x20or\x20unsu
+SF:pported\x20method\.</p>\n\x20\x20\x20\x20</body>\n</html>\n")%r(ajp,170
+SF:,"<!DOCTYPE\x20HTML>\n<html\x20lang=\"en\">\n\x20\x20\x20\x20<head>\n\x
+SF:20\x20\x20\x20\x20\x20\x20\x20<meta\x20charset=\"utf-8\">\n\x20\x20\x20
+SF:\x20\x20\x20\x20\x20<title>Error\x20response</title>\n\x20\x20\x20\x20<
+SF:/head>\n\x20\x20\x20\x20<body>\n\x20\x20\x20\x20\x20\x20\x20\x20<h1>Err
+SF:or\x20response</h1>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>Error\x20code:\
+SF:x20400</p>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>Message:\x20Bad\x20reque
+SF:st\x20syntax\x20\('\\x124\\x00\\x01'\)\.</p>\n\x20\x20\x20\x20\x20\x20\
+SF:x20\x20<p>Error\x20code\x20explanation:\x20400\x20-\x20Bad\x20request\x
+SF:20syntax\x20or\x20unsupported\x20method\.</p>\n\x20\x20\x20\x20</body>\
+SF:n</html>\n")%r(HTTPOptions,225,"HTTP/1\.0\x20501\x20Unsupported\x20meth
+SF:od\x20\('OPTIONS'\)\r\nServer:\x20X1SLocalLab/1\.0\x20\r\nDate:\x20Fri,
+SF:\x2017\x20Jul\x202026\x2003:20:28\x20GMT\r\nConnection:\x20close\r\nCon
+SF:tent-Type:\x20text/html;charset=utf-8\r\nContent-Length:\x20360\r\n\r\n
+SF:<!DOCTYPE\x20HTML>\n<html\x20lang=\"en\">\n\x20\x20\x20\x20<head>\n\x20
+SF:\x20\x20\x20\x20\x20\x20\x20<meta\x20charset=\"utf-8\">\n\x20\x20\x20\x
+SF:20\x20\x20\x20\x20<title>Error\x20response</title>\n\x20\x20\x20\x20</h
+SF:ead>\n\x20\x20\x20\x20<body>\n\x20\x20\x20\x20\x20\x20\x20\x20<h1>Error
+SF:\x20response</h1>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>Error\x20code:\x2
+SF:0501</p>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>Message:\x20Unsupported\x2
+SF:0method\x20\('OPTIONS'\)\.</p>\n\x20\x20\x20\x20\x20\x20\x20\x20<p>Erro
+SF:r\x20code\x20explanation:\x20501\x20-\x20Server\x20does\x20not\x20suppo
+SF:rt\x20this\x20operation\.</p>\n\x20\x20\x20\x20</body>\n</html>\n");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 92.50 seconds

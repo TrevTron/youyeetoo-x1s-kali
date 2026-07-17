@@ -1,0 +1,7 @@
+check,tool,exit_code,elapsed_ms,output_file
+nmap_service,nmap,0,92523,output/nmap_service.txt
+metasploit_http,msfconsole,0,4265,output/metasploit_http.txt
+nikto_local,nikto,1,9958,output/nikto_local.txt
+gobuster_local,gobuster,0,217,output/gobuster_local.txt
+ffuf_local,ffuf,0,146,output/ffuf_local.txt
+sqlmap_local,sqlmap,0,1360,output/sqlmap_local.txt

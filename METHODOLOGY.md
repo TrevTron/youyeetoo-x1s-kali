@@ -68,6 +68,20 @@ Nmap TCP-connect scan of `127.0.0.1` only.
 It does not test exploit success, external scan throughput, real credential
 attacks, monitor-mode radios, packet injection, or GPU acceleration.
 
+## Integrated loopback security workflow
+
+The follow-up workflow starts an intentionally vulnerable Python HTTP service
+that refuses any host other than `127.0.0.1`. Nmap performs service discovery,
+the Metasploit HTTP-version scanner validates framework operation, Nikto checks
+the local HTTP surface, Gobuster and ffuf use a five-entry seeded wordlist,
+SQLmap validates the deliberately unsafe SQLite query parameter, and TShark
+preserves a loopback PCAP. Each tool has a five-minute command timeout.
+
+Systemd failures and relevant OOM, thermal, throttling, segmentation-fault, and
+NVMe-critical kernel events are checked before and after. This demonstrates a
+reproducible multi-tool workflow without creating an external target or making
+a claim about unauthorized systems.
+
 ## Comparison policy
 
 Trevor's existing Nova-versus-Raspberry-Pi work is useful editorial context but

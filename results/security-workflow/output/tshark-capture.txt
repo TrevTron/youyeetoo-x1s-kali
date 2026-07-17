@@ -1,0 +1,2 @@
+Capturing on 'Loopback: lo'
+290 packets captured

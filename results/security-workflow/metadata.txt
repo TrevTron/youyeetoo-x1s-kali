@@ -1,0 +1,5 @@
+started=2026-07-16T20:20:15-07:00
+target=http://127.0.0.1:8008
+binding=loopback-only
+authorization=Self-hosted intentionally vulnerable lab on the X1S; no external target.
+finished=2026-07-16T20:22:07-07:00

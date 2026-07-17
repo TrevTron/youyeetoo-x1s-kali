@@ -7,9 +7,11 @@ whether representative Kali tools are installed, start correctly, and can use
 the X1S CPU and local interfaces. It is not a claim that x86 makes every tool
 faster than ARM, and it is not an offensive test.
 
-The only network scan was a TCP connect scan of `127.0.0.1` ports 22 and 11434.
-No external target, exploitation, credential attack, password-cracking target,
-wireless capture, or injection was used.
+The compatibility matrix's only network scan was a TCP connect scan of
+`127.0.0.1` ports 22 and 11434. It used no external target, exploitation,
+credential attack, password-cracking target, wireless capture, or injection.
+The integrated follow-up below validates a deliberately injectable service
+created on loopback for this test.
 
 ## Results
 
@@ -52,3 +54,25 @@ explicit.
 
 Raw results, package versions, command output, and health checks are preserved
 under `logs/kali-tools-final-20260716/`.
+
+## Integrated loopback security workflow
+
+The compatibility matrix was followed by a real, bounded workflow against an
+intentionally vulnerable Python HTTP service hosted on the X1S itself. The
+service refused non-loopback binding and listened only on `127.0.0.1:8008`.
+No external host or third-party system was contacted.
+
+| Stage | Measured result | Outcome |
+| --- | --- | --- |
+| Nmap service discovery | Detected TCP/8008 open and fingerprinted `X1SLocalLab/1.0` | Pass |
+| Metasploit HTTP scanner | Identified `X1SLocalLab/1.0` on 127.0.0.1:8008 | Pass |
+| Nikto web review | Completed 8,075 requests with zero request errors and reported six intentionally exposed findings | Pass; findings-bearing exit code 1 |
+| Gobuster discovery | Found `/robots.txt`, `/admin/`, and `/item` | Pass |
+| ffuf discovery | Completed the five-entry local wordlist in 146 ms | Pass |
+| SQLmap validation | Confirmed the deliberately vulnerable `id` parameter as boolean-based blind SQL injection with SQLite | Pass |
+| TShark capture | Preserved a 43,148-byte loopback PCAP with 290 frames | Pass |
+
+The workflow ran for 1 minute 52 seconds. No systemd unit was failed before or
+after the run, and the health filter recorded no OOM, thermal, throttling,
+segmentation-fault, or NVMe-critical kernel event. Raw evidence is under
+`results/security-workflow/`.

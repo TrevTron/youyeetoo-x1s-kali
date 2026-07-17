@@ -1,0 +1,18 @@
+
+===================================================================
+Protocol Hierarchy Statistics
+Filter: 
+
+frame                                    frames:290 bytes:32953
+  eth                                    frames:290 bytes:32953
+    ip                                   frames:290 bytes:32953
+      tcp                                frames:290 bytes:32953
+        http                             frames:6 bytes:1005
+          data-text-lines                frames:3 bytes:714
+        data                             frames:50 bytes:14769
+        rpc                              frames:2 bytes:625
+          portmap                        frames:1 bytes:110
+        tls                              frames:2 bytes:330
+        sip                              frames:1 bytes:289
+        giop                             frames:1 bytes:114
+===================================================================

@@ -16,7 +16,10 @@ Package temperature averaged 74.66 C and peaked at 77 C; the NVMe remained at
 35.9 C.
 
 The stock Kali amd64 default and top-10 toolsets installed and launched the
-representative professional tools tested here. CPU-only local inference is
+representative professional tools tested here. A separate loopback-only
+workflow joined service discovery, HTTP enumeration, content discovery,
+SQL-injection validation, and packet capture against an intentionally
+vulnerable service hosted on the X1S itself. CPU-only local inference is
 practical with small models: about 6.8 tokens/second for 0.6B, 3.1 for 1.7B,
 roughly 2 for 4B-class models, and 0.924 for 8B in the fixed benchmark. A
 full-resolution Gemma 3 4B vision request did not finish within 20 minutes, a
@@ -34,6 +37,7 @@ useful negative result that marks the tested CPU's practical boundary.
 | 8B text inference | Fits in RAM; 0.924 warm generation tok/s |
 | Full-HD 4B vision | No output before fixed 20-minute timeout |
 | Kali compatibility | 14/14 representative checks produced intended tool output |
+| Integrated security workflow | Nmap, Metasploit, Nikto, Gobuster, ffuf, SQLmap, and TShark completed against a loopback-only lab |
 
 ## Repository map
 
@@ -43,7 +47,7 @@ useful negative result that marks the tested CPU's practical boundary.
 - [BENCHMARK_RESULTS.md](BENCHMARK_RESULTS.md): inference, vision, and thermal
   analysis.
 - [KALI_TOOL_RESULTS.md](KALI_TOOL_RESULTS.md): bounded professional-tool
-  compatibility matrix.
+  compatibility matrix and integrated loopback workflow.
 - `scripts/`: reusable Bash collectors and guarded test runners.
 - `results/`: selected raw JSON, CSV, package, command, and health evidence.
 - `images/`: publication-safe installation and hardware evidence.
@@ -59,6 +63,9 @@ MAX_TEMP_C=85 DURATION=15m ./scripts/thermal_soak.sh
 
 # Safe compatibility/startup matrix; Nmap target is loopback only
 ./scripts/kali_tool_matrix.sh
+
+# Integrated local workflow; starts an intentionally vulnerable service on 127.0.0.1 only
+./scripts/local_security_workflow.sh
 
 # CPU-only Ollama model matrix; requires the listed models first
 MAX_TEMP_C=85 ./scripts/benchmark_ollama.sh
@@ -76,9 +83,11 @@ temperature, workload, or production duty cycle.
 
 ## Responsible-use boundary
 
-The security-tool matrix contains no external scan, exploitation, credential
-attack, cracking target, wireless capture, or packet injection. Use Kali tools
-only on systems you own or are explicitly authorized to test.
+The security tests contain no external scan, credential attack, cracking
+target, wireless capture, or packet injection. The integrated workflow uses a
+deliberately injectable service created by this repository and bound only to
+`127.0.0.1`. Use Kali tools only on systems you own or are explicitly
+authorized to test.
 
 ## License
 

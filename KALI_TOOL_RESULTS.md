@@ -53,7 +53,7 @@ matched cross-platform method. The public article should keep those boundaries
 explicit.
 
 Raw results, package versions, command output, and health checks are preserved
-under `logs/kali-tools-final-20260716/`.
+under `results/kali-tools/`.
 
 ## Integrated loopback security workflow
 

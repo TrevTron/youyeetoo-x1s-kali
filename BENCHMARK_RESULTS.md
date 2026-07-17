@@ -133,8 +133,9 @@ ambient temperature, enclosure, workload, or multi-hour duty cycle.
   recorded throttle events and no frequency decline.
 
 Raw request JSON, model manifests, response hashes, per-second telemetry, and
-health logs are preserved under `logs/inference-2026-07-16/`.
-Longer-cap completion evidence is under `logs/inference-followup-2026-07-16/`.
-Vision evidence is under `logs/vision-probe-2026-07-16/`; the preserved first
-attempt is under `logs/vision-probe-2026-07-16-attempt1/`.
-Synthetic thermal evidence is under `logs/thermal-final-20260716/`.
+health logs are preserved under `results/inference/`.
+Longer-cap completion evidence is under `results/inference-followup/`.
+Vision evidence is under `results/vision-probe/`; the source screenshot and
+base64 payload are intentionally omitted because the desktop panel exposed a
+private network address.
+Synthetic thermal evidence is under `results/thermal/`.

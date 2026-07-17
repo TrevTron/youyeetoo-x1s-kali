@@ -1,0 +1,10 @@
+* text=auto
+*.sh text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.log text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.jpg binary
+*.png binary

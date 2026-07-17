@@ -1,0 +1,9 @@
+1. eth0
+2. vpn-interface-redacted
+3. any
+4. lo (Loopback)
+5. bluetooth-monitor
+6. nflog
+7. nfqueue
+8. dbus-system
+9. dbus-session

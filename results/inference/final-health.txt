@@ -1,0 +1,13 @@
+finished=2026-07-16T18:26:34-07:00
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+Jul 16 17:23:27 x1s-kali kernel: CPU0: Thermal monitoring enabled (TM1)
+Jul 16 17:23:27 x1s-kali kernel: thermal_sys: Registered thermal governor 'fair_share'
+Jul 16 17:23:27 x1s-kali kernel: thermal_sys: Registered thermal governor 'bang_bang'
+Jul 16 17:23:27 x1s-kali kernel: thermal_sys: Registered thermal governor 'step_wise'
+Jul 16 17:23:27 x1s-kali kernel: thermal_sys: Registered thermal governor 'user_space'
+Jul 16 17:23:27 x1s-kali kernel: thermal_sys: Registered thermal governor 'power_allocator'
+Jul 16 17:23:27 x1s-kali kernel: thermal LNXTHERM:00: registered as thermal_zone0
+Jul 16 17:23:27 x1s-kali kernel: ACPI: thermal: Thermal Zone [TZ00] (0 C)
+Jul 16 17:23:28 x1s-kali kernel: proc_thermal 0000:00:04.0: enabling device (0000 -> 0002)

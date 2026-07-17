@@ -1,0 +1,2 @@
+1.9.11#stable
+[19:30:17] [WARNING] your sqlmap version is outdated

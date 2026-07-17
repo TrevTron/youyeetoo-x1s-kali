@@ -1,0 +1,10 @@
+started=2026-07-16T19:12:18-07:00
+hostname=x1s-kali
+kernel=6.16.8+kali-amd64
+stress_ng=stress-ng, version 0.21.03 (gcc 15.2.0, x86_64 Linux 6.16.8+kali-amd64)
+duration=15m
+workers=4
+max_temp_c=85
+governors=powersave
+initial_pkg_temp_c=43.0
+initial_nvme_temp_c=35.9

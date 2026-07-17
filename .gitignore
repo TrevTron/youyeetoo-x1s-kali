@@ -1,0 +1,12 @@
+private/
+PRIVATE_CREDENTIALS.md
+*.key
+*.pem
+*known_hosts*
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

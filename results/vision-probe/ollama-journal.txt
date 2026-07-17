@@ -1,0 +1,282 @@
+Jul 16 18:37:30 x1s-kali ollama[25695]: time=2026-07-16T18:37:30.865-07:00 level=INFO source=sched.go:1158 msg="disabling mmap for llama-server load by default" model=/usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25 reason=cpu
+Jul 16 18:37:30 x1s-kali ollama[25695]: time=2026-07-16T18:37:30.865-07:00 level=INFO source=server.go:109 msg="using llama-server for model" model=/usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25
+Jul 16 18:37:30 x1s-kali ollama[25695]: time=2026-07-16T18:37:30.866-07:00 level=INFO source=llama_server.go:433 msg="starting llama-server" cmd="/usr/local/lib/ollama/llama-server --model /usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25 --port 39807 --host 127.0.0.1 --no-webui --offline -c 4096 -np 1 --log-verbosity 4 --no-log-prefix --no-log-timestamps --no-jinja --chat-template chatml --mmproj /usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25 --no-mmap --flash-attn auto -b 512 -ub 512 --context-shift --keep 4"
+Jul 16 18:37:30 x1s-kali ollama[25695]: time=2026-07-16T18:37:30.866-07:00 level=INFO source=sched.go:623 msg="system memory" total="15.5 GiB" free="14.3 GiB" free_swap="6.2 GiB"
+Jul 16 18:37:30 x1s-kali ollama[25695]: time=2026-07-16T18:37:30.866-07:00 level=INFO source=llama_server.go:1001 msg="loading model via llama-server" model=/usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25
+Jul 16 18:37:30 x1s-kali ollama[25695]: time=2026-07-16T18:37:30.866-07:00 level=INFO source=llama_server.go:1248 msg="waiting for llama-server to start responding"
+Jul 16 18:37:30 x1s-kali ollama[25695]: time=2026-07-16T18:37:30.866-07:00 level=INFO source=llama_server.go:1303 msg="waiting for llama-server to become available" status="llm server not responding"
+Jul 16 18:37:30 x1s-kali ollama[25695]: cmn  common_param: common_params_print_info: build 1 (cb295bf59) with GNU 11.2.1 for Linux x86_64
+Jul 16 18:37:30 x1s-kali ollama[25695]: cmn  common_param: common_params_print_info: verbosity = 4 (adjust with the `-lv N` CLI arg)
+Jul 16 18:37:30 x1s-kali ollama[25695]: cmn  common_param: device_info:
+Jul 16 18:37:30 x1s-kali ollama[25695]: cmn  common_param:   - CPU     : Intel(R) Celeron(R) N5095 @ 2.00GHz (15833 MiB, 15833 MiB free)
+Jul 16 18:37:30 x1s-kali ollama[25695]: cmn  common_param: system_info: n_threads = 4 (n_threads_batch = 4) / 4 | CPU : SSE3 = 1 | SSSE3 = 1 | LLAMAFILE = 1 | REPACK = 1 |
+Jul 16 18:37:30 x1s-kali ollama[25695]: srv          init: using 5 threads for HTTP server
+Jul 16 18:37:30 x1s-kali ollama[25695]: srv          init: The UI is disabled
+Jul 16 18:37:30 x1s-kali ollama[25695]: srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+Jul 16 18:37:30 x1s-kali ollama[25695]: srv         start: binding port with default address family
+Jul 16 18:37:30 x1s-kali ollama[25695]: srv    load_model: loading model '/usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25'
+Jul 16 18:37:30 x1s-kali ollama[25695]: srv    load_model: local path '/usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25'
+Jul 16 18:37:31 x1s-kali ollama[25695]: translate_clip_metadata: detected Ollama-format gemma3 GGUF used as mmproj; translating
+Jul 16 18:37:31 x1s-kali ollama[25695]: srv    load_model: [mtmd] estimated worst-case memory usage of mmproj is 933.04 MiB (took 141.06 ms)
+Jul 16 18:37:31 x1s-kali ollama[25695]: cmn  common_init_: fitting params to device memory ...
+Jul 16 18:37:31 x1s-kali ollama[25695]: cmn  common_init_: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)
+Jul 16 18:37:31 x1s-kali ollama[25695]: common_params_fit_impl: getting device memory data for initial parameters:
+Jul 16 18:37:31 x1s-kali ollama[25695]: time=2026-07-16T18:37:31.117-07:00 level=INFO source=llama_server.go:1303 msg="waiting for llama-server to become available" status="llm server loading model"
+Jul 16 18:37:31 x1s-kali ollama[25695]: handle_gemma3: detected Ollama-format gemma3 GGUF; applying compatibility fixes
+Jul 16 18:37:31 x1s-kali ollama[25695]: common_memory_breakdown_print: | memory breakdown [MiB] | total   free    self   model   context   compute    unaccounted |
+Jul 16 18:37:31 x1s-kali ollama[25695]: common_memory_breakdown_print: |   - Host               |                 2706 =  2367 +     254 +      84                |
+Jul 16 18:37:31 x1s-kali ollama[25695]: common_params_fit_impl: projected to use 2706 MiB of host memory vs. 15833 MiB of total host memory
+Jul 16 18:37:31 x1s-kali ollama[25695]: common_params_fit_impl: will leave 13127 >= 2759 MiB of system memory, no changes needed
+Jul 16 18:37:31 x1s-kali ollama[25695]: common_fit_params: successfully fit params to free device memory
+Jul 16 18:37:31 x1s-kali ollama[25695]: common_fit_params: fitting params to free memory took 0.79 seconds
+Jul 16 18:37:31 x1s-kali ollama[25695]: handle_gemma3: detected Ollama-format gemma3 GGUF; applying compatibility fixes
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: loaded meta data with 41 key-value pairs and 444 tensors from /usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25 (version GGUF V3 (latest))
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   0:                gemma3.attention.head_count u32              = 8
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   1:             gemma3.attention.head_count_kv u32              = 4
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   2:                gemma3.attention.key_length u32              = 256
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   3:            gemma3.attention.sliding_window u32              = 1024
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   4:              gemma3.attention.value_length u32              = 256
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   5:                         gemma3.block_count u32              = 34
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   6:                      gemma3.context_length u32              = 131072
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   7:                    gemma3.embedding_length u32              = 2560
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   8:                 gemma3.feed_forward_length u32              = 10240
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv   9:                 gemma3.mm.tokens_per_image u32              = 256
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  10:         gemma3.vision.attention.head_count u32              = 16
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  11: gemma3.vision.attention.layer_norm_epsilon f32              = 0.000001
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  12:                  gemma3.vision.block_count u32              = 27
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  13:             gemma3.vision.embedding_length u32              = 1152
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  14:          gemma3.vision.feed_forward_length u32              = 4304
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  15:                   gemma3.vision.image_size u32              = 896
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  16:                 gemma3.vision.num_channels u32              = 3
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  17:                   gemma3.vision.patch_size u32              = 14
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  18:                       general.architecture str              = gemma3
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  19:               tokenizer.ggml.add_bos_token bool             = true
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  20:               tokenizer.ggml.add_eos_token bool             = false
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  21:           tokenizer.ggml.add_padding_token bool             = false
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  22:           tokenizer.ggml.add_unknown_token bool             = false
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  23:                tokenizer.ggml.bos_token_id u32              = 2
+Jul 16 18:37:31 x1s-kali ollama[25695]: llama_model_loader: - kv  24:                tokenizer.ggml.eos_token_id u32              = 1
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  25:                      tokenizer.ggml.merges arr[str,514906]  = ["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n", ...
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  26:                       tokenizer.ggml.model str              = llama
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  27:            tokenizer.ggml.padding_token_id u32              = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  28:                         tokenizer.ggml.pre str              = default
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  29:            tokenizer.ggml.unknown_token_id u32              = 3
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  30:               general.quantization_version u32              = 2
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  31:                          general.file_type u32              = 15
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  32:    gemma3.attention.layer_norm_rms_epsilon f32              = 0.000001
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  33:                      gemma3.rope.freq_base f32              = 1000000.000000
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  34:                  gemma3.rope.freq_base_swa f32              = 10000.000000
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  35:                    tokenizer.chat_template str              = {{ bos_token }}{% if messages[0]['rol...
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  36:                   gemma3.rope.scaling.type str              = linear
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  37:                 gemma3.rope.scaling.factor f32              = 8.000000
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  38:                      tokenizer.ggml.tokens arr[str,262144]  = ["<pad>", "<eos>", "<bos>", "<unk>", ...
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  39:                      tokenizer.ggml.scores arr[f32,262144]  = [0.000000, 0.000000, 0.000000, 0.0000...
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - kv  40:                  tokenizer.ggml.token_type arr[i32,262144]  = [3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, ...
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - type  f32:  205 tensors
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - type q4_K:  205 tensors
+Jul 16 18:37:32 x1s-kali ollama[25695]: llama_model_loader: - type q6_K:   34 tensors
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: file format = GGUF V3 (latest)
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: file type   = Q4_K - Medium
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: file size   = 2.31 GiB (5.12 BPW)
+Jul 16 18:37:32 x1s-kali ollama[25695]: load: 0 unused tokens
+Jul 16 18:37:32 x1s-kali ollama[25695]: load: control-looking token:    212 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+Jul 16 18:37:32 x1s-kali ollama[25695]: load: printing all EOG tokens:
+Jul 16 18:37:32 x1s-kali ollama[25695]: load:   - 1 ('<eos>')
+Jul 16 18:37:32 x1s-kali ollama[25695]: load:   - 106 ('<end_of_turn>')
+Jul 16 18:37:32 x1s-kali ollama[25695]: load:   - 212 ('</s>')
+Jul 16 18:37:32 x1s-kali ollama[25695]: load: special tokens cache size = 7
+Jul 16 18:37:32 x1s-kali ollama[25695]: load: token to piece cache size = 1.9446 MB
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: arch                  = gemma3
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: vocab_only            = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: no_alloc              = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_ctx_train           = 131072
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_inp            = 2560
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd                = 2560
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_out            = 2560
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_layer               = 34
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_layer_all           = 34
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_head                = 8
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_head_kv             = 4
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_rot                 = 256
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_swa                 = 1024
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: is_swa_any            = 1
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_head_k         = 256
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_head_v         = 256
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_gqa                 = 2
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_k_gqa          = 1024
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_v_gqa          = 1024
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: f_norm_eps            = 0.0e+00
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: f_norm_rms_eps        = 1.0e-06
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: f_clamp_kqv           = 0.0e+00
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: f_max_alibi_bias      = 0.0e+00
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: f_logit_scale         = 0.0e+00
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: f_attn_scale          = 6.2e-02
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: f_attn_value_scale    = 0.0000
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_ff                  = 10240
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_expert              = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_expert_used         = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_expert_groups       = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_group_used          = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: causal attn           = 1
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: pooling type          = -1
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: rope type             = 2
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: rope scaling          = linear
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: freq_base_train       = 1000000.0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: freq_scale_train      = 0.125
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: freq_base_swa         = 10000.0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: freq_scale_swa        = 1
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_head_k_swa     = 256
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_embd_head_v_swa     = 256
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_rot_swa             = 256
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_ctx_orig_yarn       = 131072
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: rope_yarn_log_mul     = 0.0000
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: rope_finetuned        = unknown
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: model type            = 4B
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: model params          = 3.88 B
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: general.name          = n/a
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: vocab type            = SPM
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_vocab               = 262144
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: n_merges              = 0
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: BOS token             = 2 '<bos>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: EOS token             = 1 '<eos>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: EOT token             = 106 '<end_of_turn>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: UNK token             = 3 '<unk>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: PAD token             = 0 '<pad>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: LF token              = 248 '<0x0A>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: EOG token             = 1 '<eos>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: EOG token             = 106 '<end_of_turn>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: EOG token             = 212 '</s>'
+Jul 16 18:37:32 x1s-kali ollama[25695]: print_info: max token length      = 93
+Jul 16 18:37:32 x1s-kali ollama[25695]: load_tensors: loading model tensors, this can take a while... (mmap = false, direct_io = false)
+Jul 16 18:37:32 x1s-kali ollama[25695]: load_tensors:          CPU model buffer size =  2367.54 MiB
+Jul 16 18:37:33 x1s-kali ollama[25695]: cmn  common_init_: added <eos> logit bias = -inf
+Jul 16 18:37:33 x1s-kali ollama[25695]: cmn  common_init_: added <end_of_turn> logit bias = -inf
+Jul 16 18:37:33 x1s-kali ollama[25695]: cmn  common_init_: added </s> logit bias = -inf
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: constructing llama_context
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_seq_max     = 1
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_ctx         = 4096
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_ctx_seq     = 4096
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_batch       = 512
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_ubatch      = 512
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: causal_attn   = 1
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: flash_attn    = auto
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: kv_unified    = false
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: freq_base     = 1000000.0
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: freq_scale    = 0.125
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_rs_seq      = 0
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_outputs_max = 1
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context: n_ctx_seq (4096) < n_ctx_train (131072) -- the full capacity of the model will not be utilized
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_context:        CPU  output buffer size =     1.00 MiB
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache_iswa: creating non-SWA KV cache, size = 4096 cells
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache:        CPU KV buffer size =    80.00 MiB
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache: size =   80.00 MiB (  4096 cells,   5 layers,  1/1 seqs), K (f16):   40.00 MiB, V (f16):   40.00 MiB
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache: attn_rot_k = 0, n_embd_head_k_all = 256
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache: attn_rot_v = 0, n_embd_head_k_all = 256
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache_iswa: creating     SWA KV cache, size = 1536 cells
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache:        CPU KV buffer size =   174.00 MiB
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache: size =  174.00 MiB (  1536 cells,  29 layers,  1/1 seqs), K (f16):   87.00 MiB, V (f16):   87.00 MiB
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache: attn_rot_k = 0, n_embd_head_k_all = 256
+Jul 16 18:37:33 x1s-kali ollama[25695]: llama_kv_cache: attn_rot_v = 0, n_embd_head_k_all = 256
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: reserving ...
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: Flash Attention was auto, set to enabled
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: resolving fused Gated Delta Net support:
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: fused Gated Delta Net (autoregressive) enabled
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: fused Gated Delta Net (chunked) enabled
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve:        CPU compute buffer size =    84.52 MiB
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: graph nodes  = 1367
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: graph splits = 1
+Jul 16 18:37:33 x1s-kali ollama[25695]: sched_reserve: reserve took 5.46 ms, sched copies = 1
+Jul 16 18:37:33 x1s-kali ollama[25695]: cmn  common_init_: KV cache shifting is not supported for this context, disabling KV cache shifting
+Jul 16 18:37:33 x1s-kali ollama[25695]: cmn  common_init_: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+Jul 16 18:37:34 x1s-kali ollama[25695]: translate_clip_metadata: detected Ollama-format gemma3 GGUF used as mmproj; translating
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_model_loader: model name:
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_model_loader: description:
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_model_loader: GGUF version: 3
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_model_loader: alignment:    32
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_model_loader: n_tensors:    883
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_model_loader: n_kv:         48
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_model_loader: has vision encoder
+Jul 16 18:37:34 x1s-kali ollama[25695]: clip_ctx: CLIP using CPU backend
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: projector:          gemma3
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: n_embd:             1152
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: n_head:             16
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: n_ff:               4304
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: n_layer:            27
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: ffn_op:             gelu
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: projection_dim:     2560
+Jul 16 18:37:34 x1s-kali ollama[25695]: --- vision hparams ---
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: image_size:         896
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: patch_size:         14
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: has_llava_proj:     0
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: minicpmv_version:   0
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: n_merge:            4
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: n_wa_pattern: 0
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: model size:         3179.33 MiB
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_hparams: metadata size:      0.31 MiB
+Jul 16 18:37:34 x1s-kali ollama[25695]: load_tensors: ffn up/down are swapped
+Jul 16 18:37:34 x1s-kali ollama[25695]: compat tensor transform: op=F16->F32 promote tensor=v.patch_embd.weight bytes=2709504 duration_ms=3.954 total_ops=1 total_bytes=2709504 total_ms=3.954
+Jul 16 18:37:34 x1s-kali ollama[25695]: compat tensor transform: op=F16->F32 promote tensor=v.position_embd.weight bytes=18874368 duration_ms=39.129 total_ops=2 total_bytes=21583872 total_ms=43.084
+Jul 16 18:37:34 x1s-kali ollama[25695]: get_dummy_batch: warmup with image size = 896 x 896
+Jul 16 18:37:34 x1s-kali ollama[25695]: get_dummy_batch: warmup with image size = 896 x 896
+Jul 16 18:37:34 x1s-kali ollama[25695]: reserve_compute_meta:        CPU compute buffer size =   121.25 MiB
+Jul 16 18:37:34 x1s-kali ollama[25695]: reserve_compute_meta: graph splits = 1, nodes = 865
+Jul 16 18:37:34 x1s-kali ollama[25695]: warmup: flash attention is enabled
+Jul 16 18:37:34 x1s-kali ollama[25695]: srv    load_model: loaded multimodal model, '/usr/share/ollama/.ollama/models/blobs/sha256-aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25'
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+Jul 16 18:37:35 x1s-kali ollama[25695]: spec common_specu: no implementations specified for speculative decoding
+Jul 16 18:37:35 x1s-kali ollama[25695]: slot   load_model: id  0 | task -1 | new slot, n_ctx = 4096
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv    load_model: prompt cache is enabled, size limit: 8192 MiB
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv    load_model: use `--cache-ram 0` to disable the prompt cache
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv    load_model: for more info see https://github.com/ggml-org/llama.cpp/pull/16391
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv    load_model: context checkpoints enabled, max = 32, min spacing = 8192
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv          init: idle slots will be saved to prompt cache upon starting a new task
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv          init: init: chat template, example_format: '<|im_start|>system
+Jul 16 18:37:35 x1s-kali ollama[25695]: You are a helpful assistant<|im_end|>
+Jul 16 18:37:35 x1s-kali ollama[25695]: <|im_start|>user
+Jul 16 18:37:35 x1s-kali ollama[25695]: Hello<|im_end|>
+Jul 16 18:37:35 x1s-kali ollama[25695]: <|im_start|>assistant
+Jul 16 18:37:35 x1s-kali ollama[25695]: Hi there<|im_end|>
+Jul 16 18:37:35 x1s-kali ollama[25695]: <|im_start|>user
+Jul 16 18:37:35 x1s-kali ollama[25695]: How are you?<|im_end|>
+Jul 16 18:37:35 x1s-kali ollama[25695]: <|im_start|>assistant
+Jul 16 18:37:35 x1s-kali ollama[25695]: '
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv          init: init: chat template, thinking = 0
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv  llama_server: model loaded
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv  llama_server: listening on http://127.0.0.1:39807
+Jul 16 18:37:35 x1s-kali ollama[25695]: srv  update_slots: all slots are idle
+Jul 16 18:37:35 x1s-kali ollama[25695]: time=2026-07-16T18:37:35.909-07:00 level=INFO source=llama_server.go:1315 msg="llama-server started in 5.04 seconds"
+Jul 16 18:37:36 x1s-kali ollama[25695]: time=2026-07-16T18:37:36.079-07:00 level=INFO source=images.go:373 msg="template selection" model=registry.ollama.ai/library/gemma3:4b selected=go_template renderer="" parser="" go_template="[completion vision]" chat_template=null harmony=null renderer_parser=null
+Jul 16 18:37:36 x1s-kali ollama[25695]: time=2026-07-16T18:37:36.079-07:00 level=INFO source=sched.go:739 msg="loaded runners" count=1
+Jul 16 18:37:36 x1s-kali ollama[25695]: time=2026-07-16T18:37:36.079-07:00 level=INFO source=llama_server.go:1248 msg="waiting for llama-server to start responding"
+Jul 16 18:37:36 x1s-kali ollama[25695]: time=2026-07-16T18:37:36.080-07:00 level=INFO source=llama_server.go:1315 msg="llama-server started in 5.21 seconds"
+Jul 16 18:37:36 x1s-kali ollama[25695]: slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+Jul 16 18:37:36 x1s-kali ollama[25695]: srv  get_availabl: updating prompt cache
+Jul 16 18:37:36 x1s-kali ollama[25695]: srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+Jul 16 18:37:36 x1s-kali ollama[25695]: srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 4096 tokens, 8589934592 est)
+Jul 16 18:37:36 x1s-kali ollama[25695]: srv  get_availabl: prompt cache update took 0.03 ms
+Jul 16 18:37:36 x1s-kali ollama[25695]: slot launch_slot_: id  0 | task -1 | sampler chain: logits -> penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> ?min-p -> ?xtc -> temp-ext -> dist
+Jul 16 18:37:36 x1s-kali ollama[25695]: slot launch_slot_: id  0 | task -1 | sampler params:
+Jul 16 18:37:36 x1s-kali ollama[25695]:         repeat_last_n = 64, repeat_penalty = 1.100, frequency_penalty = 0.000, presence_penalty = 0.000
+Jul 16 18:37:36 x1s-kali ollama[25695]:         dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 4096
+Jul 16 18:37:36 x1s-kali ollama[25695]:         top_k = 64, top_p = 0.950, min_p = 0.000, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.000
+Jul 16 18:37:36 x1s-kali ollama[25695]:         mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+Jul 16 18:37:36 x1s-kali ollama[25695]: slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+Jul 16 18:37:36 x1s-kali ollama[25695]: slot   operator(): id  0 | task 0 | new prompt, n_ctx_slot = 4096, n_keep = 4, task.n_tokens = 317
+Jul 16 18:37:36 x1s-kali ollama[25695]: slot   operator(): id  0 | task 0 | cached n_tokens = 0, memory_seq_rm [0, end)
+Jul 16 18:37:36 x1s-kali ollama[25695]: srv  stream_sessi: conv_id= (empty=1)
+Jul 16 18:37:39 x1s-kali ollama[25695]: slot print_timing: id  0 | task 0 | prompt processing, n_tokens =     11, progress = 0.03, t =   3.50 s / 3.14 tokens per second
+Jul 16 18:37:39 x1s-kali ollama[25695]: slot   operator(): id  0 | task 0 | cached n_tokens = 11, memory_seq_rm [11, end)
+Jul 16 18:37:39 x1s-kali ollama[25695]: slot process_mtmd: id  0 | task 0 | encoding mtmd batch from idx = 11, n_chunks = 1
+Jul 16 18:37:54 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:37:54 | 200 |      32.307µs |       127.0.0.1 | HEAD     "/"
+Jul 16 18:37:54 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:37:54 | 200 |      55.036µs |       127.0.0.1 | GET      "/api/ps"
+Jul 16 18:39:02 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:39:02 | 200 |      30.469µs |       127.0.0.1 | HEAD     "/"
+Jul 16 18:39:02 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:39:02 | 200 |      36.501µs |       127.0.0.1 | GET      "/api/ps"
+Jul 16 18:40:03 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:40:03 | 200 |      31.669µs |       127.0.0.1 | HEAD     "/"
+Jul 16 18:40:03 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:40:03 | 200 |      44.188µs |       127.0.0.1 | GET      "/api/ps"
+Jul 16 18:41:06 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:41:06 | 200 |      31.578µs |       127.0.0.1 | HEAD     "/"
+Jul 16 18:41:06 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:41:06 | 200 |      42.995µs |       127.0.0.1 | GET      "/api/ps"
+Jul 16 18:57:29 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:57:29 | 500 |        19m59s |       127.0.0.1 | POST     "/api/generate"
+Jul 16 18:57:30 x1s-kali ollama[25695]: srv          stop: cancel task, id_task = 0
+Jul 16 18:58:04 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:58:04 | 200 |      36.502µs |       127.0.0.1 | HEAD     "/"
+Jul 16 18:58:04 x1s-kali ollama[25695]: [GIN] 2026/07/16 - 18:58:04 | 200 |      49.937µs |       127.0.0.1 | GET      "/api/ps"

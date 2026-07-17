@@ -1,0 +1,4 @@
+Will run 4 OpenMP threads
+Benchmarking: Raw-SHA256 [SHA256 128/128 SSE2 4x]... (4xOMP) DONE
+Raw:	16652K c/s real, 4194K c/s virtual
+

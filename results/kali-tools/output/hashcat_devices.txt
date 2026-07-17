@@ -1,0 +1,26 @@
+hashcat (v7.1.2) starting in backend information mode
+
+OpenCL Info:
+============
+
+OpenCL Platform ID #1
+  Vendor..: The pocl project
+  Name....: Portable Computing Language
+  Version.: OpenCL 3.0 PoCL 6.0+debian  Linux, None+Asserts, RELOC, SPIR-V, LLVM 18.1.8, SLEEF, DISTRO, POCL_DEBUG
+
+  Backend Device ID #01
+    Type...........: CPU
+    Vendor.ID......: 128
+    Vendor.........: GenuineIntel
+    Name...........: cpu-penryn-Intel(R) Celeron(R) N5095 @ 2.00GHz
+    Version........: OpenCL 3.0 PoCL HSTR: cpu-x86_64-pc-linux-gnu-penryn
+    Processor(s)...: 4
+    Preferred.Thrd.: 1
+    Clock..........: 2900
+    Memory.Total...: 13785 MB (limited to 2048 MB allocatable in one block)
+    Memory.Free....: 6892 MB
+    Memory.Unified.: 1
+    Local.Memory...: 32 KB
+    OpenCL.Version.: OpenCL C 1.2 PoCL
+    Driver.Version.: 6.0+debian
+

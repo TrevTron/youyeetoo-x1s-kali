@@ -1,0 +1,15 @@
+kali-linux-default,install ok installed,2025.4.11
+kali-tools-top10,install ok installed,2025.4.11
+nmap,install ok installed,7.95+dfsg-3kali1
+metasploit-framework,install ok installed,6.4.99-0kali1
+wireshark,install ok installed,4.6.0-1
+tshark,install ok installed,4.6.0-1
+john,install ok installed,1.9.0-Jumbo-1+git20211102-0kali10
+hashcat,install ok installed,7.1.2+ds1-3
+aircrack-ng,install ok installed,1:1.7+git20230807.4bf83f1a-2+b1
+sqlmap,install ok installed,1.9.11-1
+hydra,install ok installed,9.6-3
+nikto,install ok installed,1:2.5.0+git20230114.90ff645-0kali1
+gobuster,install ok installed,3.8.0-2
+ffuf,install ok installed,2.1.0-1+b9
+netexec,install ok installed,1.4.0-0kali3

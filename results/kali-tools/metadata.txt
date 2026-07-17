@@ -1,0 +1,6 @@
+started=2026-07-16T19:30:07-07:00
+hostname=x1s-kali
+os=Kali GNU/Linux Rolling 2025.4
+kernel=6.16.8+kali-amd64
+policy=Version and startup checks plus a TCP connect scan of loopback only. No external target. No exploitation. No password cracking target. No wireless capture or injection.
+finished=2026-07-16T19:30:18-07:00

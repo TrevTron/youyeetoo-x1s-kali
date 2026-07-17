@@ -1,0 +1,6 @@
+result=timeout
+timeout_seconds=1200
+http_status=500
+text_response_bytes=0
+model_unloaded_after_timeout=true
+failed_systemd_units=0

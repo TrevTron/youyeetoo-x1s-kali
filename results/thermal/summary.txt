@@ -1,0 +1,9 @@
+samples=760
+avg_cpu_pct=100.00
+max_cpu_pct=100.00
+max_pkg_temp_c=77.0
+max_nvme_temp_c=35.9
+min_mem_available_mib=14609.0
+stress_rc=0
+thermal_abort=no
+finished=2026-07-16T19:27:26-07:00

@@ -1,0 +1,15 @@
+check,tool,installed,exit_code,elapsed_ms,scope,output_file
+nmap_version,nmap,yes,0,26,version,output/nmap_version.txt
+nmap_loopback,nmap,yes,0,82,loopback-only,output/nmap_loopback.txt
+metasploit_startup,msfconsole,yes,0,3591,startup-only,output/metasploit_startup.txt
+tshark_version,tshark,yes,0,214,version,output/tshark_version.txt
+dumpcap_interfaces,dumpcap,yes,0,5,local-interface-enumeration,output/dumpcap_interfaces.txt
+john_benchmark,john,yes,0,5108,synthetic-built-in-benchmark,output/john_benchmark.txt
+hashcat_devices,hashcat,yes,0,70,local-compute-device-enumeration,output/hashcat_devices.txt
+aircrack_help,aircrack-ng,yes,0,7,help-only,output/aircrack_help.txt
+sqlmap_version,sqlmap,yes,0,510,version,output/sqlmap_version.txt
+hydra_help,hydra,yes,255,155,help-only,output/hydra_help.txt
+nikto_version,nikto,yes,0,113,version,output/nikto_version.txt
+gobuster_version,gobuster,yes,0,6,version,output/gobuster_version.txt
+ffuf_version,ffuf,yes,0,4,version,output/ffuf_version.txt
+netexec_version,netexec,yes,1,572,version,output/netexec_version.txt

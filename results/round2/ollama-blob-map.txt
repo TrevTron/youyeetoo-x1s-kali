@@ -1,0 +1,6 @@
+qwen3:0.6b | sha256:7f4030143c1c477224c5434f8272c662a8b042079a0a584f0a27a1684fe2e1fa | 522640096 bytes | gguf_file_type=15
+qwen3:1.7b | sha256:3d0b790534fe4b79525fc3692950408dca41171676ed7e21db57af5c65ef6ab6 | 1359279776 bytes | gguf_file_type=15
+qwen3:4b-instruct | sha256:85e4a5b7b8ef0e48af0e8658f5aaab9c2324c76c1641493f4d1e25fce54b18b9 | 2497280480 bytes | gguf_file_type=15
+phi4-mini:latest | sha256:3c168af1dea0a414299c7d9077e100ac763370e5a98b3c53801a958a47f0a5db | 2491874624 bytes | gguf_file_type=15
+gemma3:4b | sha256:aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25 | 3338792448 bytes | gguf_file_type=15
+qwen3:8b | sha256:a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f | 5225374496 bytes | gguf_file_type=15

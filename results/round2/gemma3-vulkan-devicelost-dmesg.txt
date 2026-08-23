@@ -1,0 +1,7 @@
+Aug 23 15:53:59 [host] kernel: Fence expiration time out i915-0000:00:02.0:llama-bench[63613]:1554!
+Aug 23 15:53:59 [host] kernel: Fence expiration time out i915-0000:00:02.0:llama-bench[63613]:155a!
+Aug 23 15:53:59 [host] kernel: Fence expiration time out i915-0000:00:02.0:llama-bench[63613]:1558!
+Aug 23 15:53:59 [host] kernel: Fence expiration time out i915-0000:00:02.0:llama-bench[63613]:1556!
+Aug 23 15:54:05 [host] kernel: i915 0000:00:02.0: [drm] Resetting rcs0 for preemption time out
+Aug 23 15:54:05 [host] kernel: i915 0000:00:02.0: [drm] llama-bench[63613] context reset due to GPU hang
+Aug 23 15:54:06 [host] kernel: i915 0000:00:02.0: [drm] GPU HANG: ecode 11:1:8ed9fff3, in llama-bench [63613]

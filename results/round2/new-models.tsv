@@ -1,0 +1,4 @@
+model	total_s	eval_tokens	eval_s	eval_tps	done_reason	peak_pkg_c
+gemma3n:e2b	56.1	96	29.62	3.24	length	80.0
+granite4:tiny-h	35.5	96	17.68	5.43	length	79.0
+lfm2.5:latest	36.12	96	19.41	4.95	length	80.0

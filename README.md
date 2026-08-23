@@ -22,7 +22,9 @@ The X1S completed a verified 15-minute all-core `stress-ng` run with four worker
 
 Kali's standard amd64 desktop, top-10 tools, and default tool collection installed normally. Fourteen representative checks produced the intended output, and the integrated loopback lab joined discovery, enumeration, validation, and packet capture without touching an external target.
 
-Local AI was useful within clear limits. Qwen3 0.6B was the fastest model tested, while Qwen3 1.7B felt like the more practical balance at 3.129 warm tokens per second. The 4B-class models stayed around 1.8 to 2.0 tokens per second. Qwen3 8B fit in memory and stopped naturally, but 0.924 tokens per second is patient, not interactive. A full-resolution Gemma 3 4B vision request produced no output before the fixed 20-minute cutoff.
+Local AI was useful within clear limits. In the first CPU-only matrix, Qwen3 0.6B was the fastest model tested, while Qwen3 1.7B felt like the more practical balance at 3.129 warm tokens per second. The 4B-class models stayed around 1.8 to 2.0 tokens per second. Qwen3 8B fit in memory and stopped naturally, but 0.924 tokens per second is patient, not interactive. A full-resolution Gemma 3 4B vision request produced no output before the fixed 20-minute cutoff.
+
+Round 2 adds the requested runtime and Vulkan work. It retains the exact Q4_K_M model blobs for the original six tags, reports Ollama request throughput beside llama.cpp `llama-bench` CPU and Vulkan throughput, and keeps the limits visible. These are not identical end-to-end harnesses: Ollama used the natural-language request while `llama-bench` used a synthetic 128-token prompt. Vulkan made prompt processing much faster and ran cooler, but did not consistently improve token generation on the shared-DDR4 iGPU. Qwen3 8B completed on Vulkan after the CPU microbenchmark reached its 10-minute cap. The Gemma 3 Vulkan attempt produced a recoverable i915 GPU hang, preserved here rather than edited away.
 
 ## Results at a glance
 
@@ -36,6 +38,9 @@ Local AI was useful within clear limits. Qwen3 0.6B was the fastest model tested
 | 4B text models | 1.824 to 1.995 warm tokens/s |
 | 8B text model | Fits in memory; 0.924 warm tokens/s |
 | Full-HD 4B vision | No output before the 20-minute cutoff |
+| Round 2 Vulkan prompt processing | 3.3 to 7 times the CPU microbenchmark, depending on model |
+| Round 2 Vulkan generation | Faster for Qwen3 0.6B, similar for 1.7B, lower for the tested 4B and 8B models |
+| Round 2 GPU failure | Gemma 3 4B caused a recoverable i915 reset and `vk::DeviceLostError`; no safety settings were changed |
 | Kali compatibility | 14/14 representative checks produced intended output |
 | Local security workflow | Nmap, Metasploit, Nikto, Gobuster, ffuf, SQLmap, and TShark completed together on loopback |
 
@@ -74,9 +79,12 @@ MAX_TEMP_C=85 ./scripts/benchmark_ollama.sh
 - [`INSTALLATION.md`](INSTALLATION.md) covers the USB-installer-to-NVMe rebuild and first-attempt failure.
 - [`METHODOLOGY.md`](METHODOLOGY.md) defines the workloads, safeguards, and measurement boundaries.
 - [`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md) contains the inference, vision, idle, and thermal results.
+- [`ROUND2_RESULTS.md`](ROUND2_RESULTS.md) documents the Ollama, llama.cpp CPU, and Vulkan measurements, including the retained negative result.
+- [`ROUND2_PROTOCOL.md`](ROUND2_PROTOCOL.md) records the completed method, its limits, and a clean same-request plan for the next pass.
+- [`CANDIDATE_MODEL_TABLE.md`](CANDIDATE_MODEL_TABLE.md) distinguishes measured candidates from models that still require a pinned artifact and a separate approved run.
 - [`KALI_TOOL_RESULTS.md`](KALI_TOOL_RESULTS.md) documents the compatibility matrix and integrated local workflow.
 - [`scripts/`](scripts/) contains the guarded collectors and test runners.
-- [`results/`](results/) contains selected JSON, CSV, command output, package inventory, health checks, and telemetry.
+- [`results/`](results/) contains selected JSON, CSV, command output, package inventory, health checks, and telemetry. [`results/round2/`](results/round2/) contains the sanitized round-2 summaries, model-blob digests, and GPU-hang evidence.
 - [`images/`](images/) contains the publication-safe hardware and installation photographs.
 
 ## Test boundaries
@@ -91,4 +99,4 @@ Youyeetoo supplied the X1S review unit and the 128 GB NVMe. The testing and conc
 
 ## License
 
-The scripts are available under the [MIT License](LICENSE). The photographs and written benchmark material remain copyright Trevor Unland unless a file says otherwise.
+The executable scripts are available under the [MIT License](LICENSE). The photographs, written benchmark material, and result artifacts remain copyright Trevor Unland unless a file says otherwise.

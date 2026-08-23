@@ -1,0 +1,13 @@
+model,backend,prompt_tokens,generation_tokens,repetitions,threads,gpu_layers,prompt_tps,generation_tps,generation_stddev_tps,peak_package_c,status,run_date
+qwen3-0.6b,cpu,128,96,2,4,0,10.673989,7.423754,0.011580,80,completed,2026-08-21
+qwen3-1.7b,cpu,128,96,2,4,0,3.895159,2.984174,0.002940,82,completed,2026-08-21
+qwen3-4b-instruct,cpu,128,96,2,4,0,1.923141,1.576261,0.000193,79,completed,2026-08-21
+phi4-mini-latest,cpu,128,96,2,4,0,2.140160,1.642608,0.000461,79,completed,2026-08-21
+gemma3-4b-textonly,cpu,128,96,2,4,0,5.536658,1.640005,0.001160,77,patched-text-only,2026-08-23
+qwen3-8b,cpu,128,96,2,4,0,0.899139,,,83,10-minute-cap,2026-08-21
+qwen3-0.6b,vulkan,128,96,2,4,99,37.285874,8.560756,0.007805,53,completed,2026-08-21
+qwen3-1.7b,vulkan,128,96,2,4,99,12.861262,3.475270,0.001337,56,completed,2026-08-21
+qwen3-4b-instruct,vulkan,128,96,2,4,99,6.394635,1.463981,0.236193,57,completed,2026-08-21
+phi4-mini-latest,vulkan,128,96,2,4,99,6.397755,1.478130,0.235075,61,completed,2026-08-21
+gemma3-4b-textonly,vulkan,128,96,2,4,99,5.536658,,,54,gpu-device-lost,2026-08-23
+qwen3-8b,vulkan,128,96,2,4,99,6.395396,0.837647,0.074200,61,completed,2026-08-21

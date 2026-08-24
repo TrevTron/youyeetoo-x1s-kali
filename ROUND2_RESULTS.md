@@ -4,11 +4,13 @@ Date: 2026-08-21, with the Gemma compatibility investigation completed on 2026-0
 
 This is a measurement report for one open-bench Youyeetoo X1S: Celeron N5095 (4 cores and 4 threads, SSE4.2, no AVX, AVX2, F16C, or BMI2), 16 GB installed RAM, Kali 2025.4, Mesa 25.2.6, Ollama 0.32.1, and llama.cpp commit `9a286ac` built locally with SSE4.2 and Vulkan enabled. The supplied heatsink and active fan were fitted. Ambient temperature and wall power were not instrumented.
 
-## What is directly comparable
+## What matches, and what does not
 
-Five original tags use the exact Q4_K_M GGUF blobs recorded in `results/round2/ollama-blob-map.txt`. Gemma required a separate derived text-only compatibility copy for llama.cpp. Ollama used the original deterministic request with a 96-token cap, temperature 0, seed 42, and a 4,096-token context. llama.cpp used `llama-bench` with a synthetic 128-token prompt and 96 generated tokens, four threads, and two repetitions.
+Five original tags use the exact Q4_K_M GGUF blobs recorded in `results/round2/ollama-blob-map.txt`. That verifies the model artifacts, not a fair runtime comparison. Gemma required a separate derived text-only compatibility copy for llama.cpp. Ollama used the original deterministic request with a 96-token cap, temperature 0, seed 42, and a 4,096-token context. llama.cpp used `llama-bench` with a synthetic 128-token prompt and 96 generated tokens, four threads, and two repetitions. The main llama.cpp matrix did not explicitly pass the same 4,096-token context.
 
-The weights and token-generation length align, but the Ollama requests and `llama-bench` are different harnesses. The Ollama-versus-llama.cpp figures below are generation-throughput observations, not end-to-end same-prompt latency or a claim that the prompt-evaluation numbers are interchangeable.
+The weights and token-generation length align, but the prompt, harness, and explicitly recorded context do not. The Ollama and llama.cpp CPU figures below are separate generation-throughput observations. They do not establish that either runtime is faster. A winner claim requires the clean same-request protocol in `ROUND2_PROTOCOL.md`.
+
+Correction, 2026-08-24: an earlier summary treated the first four completed CPU rows as a direct runtime comparison. That interpretation was too strong and has been removed. The raw measurements have not changed.
 
 Temperature sampling was every two seconds. The stop rules were an 85 C package-temperature guard and a 10-minute per-run cap. No GPU timeout, watchdog, driver, firmware, or kernel safety setting was weakened.
 

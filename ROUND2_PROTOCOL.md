@@ -9,6 +9,9 @@
 
 ## Limits that must travel with the results
 
+This completed matrix does not support an Ollama-versus-llama.cpp winner. Do
+not describe either runtime as faster from these rows.
+
 1. `llama-bench` did not consume the natural-language Ollama request. It generated 96 tokens after a synthetic 128-token prompt. Treat its generation throughput as a controlled microbenchmark, not a same-prompt end-to-end comparison.
 2. The original main llama-bench matrix did not explicitly pass `-c 4096`; do not state that all llama.cpp rows used a frozen 4,096-token context. The later patched Gemma CPU/Vulkan investigation did pass `-c 4096` and is a separate compatibility result.
 3. Two-second sampling supports the reported peaks and guard behavior, not a claim of per-second telemetry.

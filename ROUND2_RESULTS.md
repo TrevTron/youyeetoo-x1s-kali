@@ -22,10 +22,10 @@ Temperature sampling was every two seconds. The stop rules were an 85 C package-
 | Qwen3 1.7B | 3.47 tok/s | 2.98 tok/s | 3.48 tok/s | 12.86 tok/s | clean Vulkan run |
 | Qwen3 4B Instruct | 1.98 tok/s | 1.58 tok/s | 1.46 tok/s | 6.39 tok/s | kernel reset timeout during run window |
 | Phi-4 Mini | 2.10 tok/s | 1.64 tok/s | 1.48 tok/s | 6.40 tok/s | i915 GPU hang during run window, process returned 0 |
-| Gemma 3 4B | 2.13 tok/s | 1.64 tok/s, derived text-only compatibility copy | GPU hang | not reported | preserved failure |
+| Gemma 3 4B | 2.12 tok/s | 1.64 tok/s, derived text-only compatibility copy | GPU hang | not reported | preserved failure |
 | Qwen3 8B | 0.98 tok/s | 10-minute cap | 0.84 tok/s | 6.40 tok/s | i915 GPU hang during run window, process returned 0 |
 
-Only Qwen3 0.6B and 1.7B completed without a matching kernel reset or hang. In those clean pairs, Vulkan prompt processing was 3.3 to 7 times the CPU microbenchmark, generation improved over CPU, and recorded package peaks were 26 to 27 C lower. The 1.7B Vulkan result also matched Ollama within measurement precision.
+Only Qwen3 0.6B and 1.7B completed without a matching kernel reset or hang. In those clean pairs, Vulkan prompt processing ran at 3.3 to 3.5 times the CPU rate, generation improved over CPU, and recorded package peaks were 26 to 27 C lower.
 
 The larger-model processes still wrote benchmark rows, but their run windows contain i915 failures. Qwen3 4B reached a reset request timeout. Phi-4 Mini and Qwen3 8B coincided with explicit GPU hangs even though `llama-bench` returned 0. The Qwen3 8B number is therefore a retained diagnostic observation, not evidence of a clean completion after the CPU time cap.
 

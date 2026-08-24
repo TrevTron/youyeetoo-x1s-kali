@@ -39,7 +39,7 @@ The audited community follow-up adds official Qwen3.5 and Gemma 4 requests. Qwen
 | 4B text models | 1.824 to 1.995 warm tokens/s |
 | 8B text model | Fits in memory; 0.924 warm tokens/s |
 | Full-HD 4B vision | No output before the 20-minute cutoff |
-| Round 2 clean Vulkan runs | Qwen3 0.6B and 1.7B only; prompt processing was 3.3 to 7 times CPU, generation improved, and peaks were 26 to 27 °C lower |
+| Round 2 clean Vulkan runs | Qwen3 0.6B and 1.7B only; prompt processing ran at 3.3 to 3.5 times the CPU rate, generation improved, and peaks were 26 to 27 °C lower |
 | Round 2 unstable Vulkan rows | Qwen3 4B reset timeout; Phi-4 Mini and Qwen3 8B GPU hangs despite return code 0; Gemma 3 `vk::DeviceLostError` |
 | Qwen3.5 follow-up | 0.8B at 10.44 warm tok/s; 2B at 4.89 warm tok/s; official Q8_0 Ollama tags |
 | Gemma 4 follow-up | E2B at 3.38 and E4B at 1.78 warm tok/s; official Q4_K_M Ollama tags |

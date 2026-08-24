@@ -4,9 +4,10 @@
 
 I usually work at two ends of the small-computer spectrum: ARM boards like the Raspberry Pi and Indiedroid Nova, or complete x86 laptops like my ThinkPads. The Youyeetoo X1S lands in the interesting space between them. It has the exposed form factor of an SBC, but it runs the normal amd64 Kali stack like a small Intel PC.
 
-This repository contains the installation notes, scripts, selected raw evidence, and benchmark results behind the full article:
+This repository contains the installation notes, scripts, selected raw evidence, and benchmark results behind two connected write-ups:
 
-**[Testing the Youyeetoo X1S for a Budget Kali Cyberdeck](https://unland.dev/blog/budget-cyberdeck-youyeetoo-x1s-kali)**
+- **[Testing the Youyeetoo X1S for a Budget Kali Cyberdeck](https://unland.dev/blog/budget-cyberdeck-youyeetoo-x1s-kali)** covers the NVMe rebuild, thermals, Kali workflow, and first CPU-only model pass.
+- **[Ollama vs llama.cpp on the Youyeetoo X1S: CPU and Vulkan Benchmarks](https://unland.dev/blog/youyeetoo-x1s-ollama-llamacpp-vulkan-benchmarks)** is the separate runtime follow-up.
 
 ## Why I came back to this board
 
@@ -81,7 +82,7 @@ MAX_TEMP_C=85 ./scripts/benchmark_ollama.sh
 - [`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md) contains the inference, vision, idle, and thermal results.
 - [`ROUND2_RESULTS.md`](ROUND2_RESULTS.md) documents the Ollama, llama.cpp CPU, and Vulkan measurements, including the retained negative result.
 - [`ROUND2_PROTOCOL.md`](ROUND2_PROTOCOL.md) records the completed method, its limits, and a clean same-request plan for the next pass.
-- [`CANDIDATE_MODEL_TABLE.md`](CANDIDATE_MODEL_TABLE.md) distinguishes measured candidates from models that still require a pinned artifact and a separate approved run.
+- [`CANDIDATE_MODEL_TABLE.md`](CANDIDATE_MODEL_TABLE.md) keeps completed measurements separate from models that need a clearly identified artifact and their own benchmark pass.
 - [`KALI_TOOL_RESULTS.md`](KALI_TOOL_RESULTS.md) documents the compatibility matrix and integrated local workflow.
 - [`scripts/`](scripts/) contains the guarded collectors and test runners.
 - [`results/`](results/) contains selected JSON, CSV, command output, package inventory, health checks, and telemetry. [`results/round2/`](results/round2/) contains the sanitized round-2 summaries, model-blob digests, and GPU-hang evidence.

@@ -6,7 +6,7 @@ This is a measurement report for one open-bench Youyeetoo X1S: Celeron N5095 (4 
 
 ## What is directly comparable
 
-The six original tags use the exact Q4_K_M GGUF blobs recorded in `results/round2/ollama-blob-map.txt`. Ollama used the original deterministic request with a 96-token cap, temperature 0, seed 42, and a 4,096-token context. llama.cpp used `llama-bench` with a synthetic 128-token prompt and 96 generated tokens, four threads, and two repetitions.
+Five original tags use the exact Q4_K_M GGUF blobs recorded in `results/round2/ollama-blob-map.txt`. Gemma required a separate derived text-only compatibility copy for llama.cpp. Ollama used the original deterministic request with a 96-token cap, temperature 0, seed 42, and a 4,096-token context. llama.cpp used `llama-bench` with a synthetic 128-token prompt and 96 generated tokens, four threads, and two repetitions.
 
 The weights and token-generation length align, but the Ollama requests and `llama-bench` are different harnesses. The Ollama-versus-llama.cpp figures below are generation-throughput observations, not end-to-end same-prompt latency or a claim that the prompt-evaluation numbers are interchangeable.
 
@@ -16,20 +16,24 @@ Temperature sampling was every two seconds. The stop rules were an 85 C package-
 
 | Model | Ollama warm generation | llama.cpp CPU generation | llama.cpp Vulkan generation | Vulkan prompt processing | Outcome |
 | --- | ---: | ---: | ---: | ---: | --- |
-| Qwen3 0.6B | 7.81 tok/s | 7.42 tok/s | 8.56 tok/s | 37.29 tok/s | completed |
-| Qwen3 1.7B | 3.47 tok/s | 2.98 tok/s | 3.48 tok/s | 12.86 tok/s | completed |
-| Qwen3 4B Instruct | 1.98 tok/s | 1.58 tok/s | 1.46 tok/s | 6.39 tok/s | completed |
-| Phi-4 Mini | 2.10 tok/s | 1.64 tok/s | 1.48 tok/s | 6.40 tok/s | completed |
-| Gemma 3 4B | 2.13 tok/s | 1.64 tok/s, patched text-only artifact | GPU hang | 5.54 tok/s before the hang | preserved failure |
-| Qwen3 8B | 0.98 tok/s | 10-minute cap | 0.84 tok/s | 6.40 tok/s | Vulkan completed |
+| Qwen3 0.6B | 7.81 tok/s | 7.42 tok/s | 8.56 tok/s | 37.29 tok/s | clean Vulkan run |
+| Qwen3 1.7B | 3.47 tok/s | 2.98 tok/s | 3.48 tok/s | 12.86 tok/s | clean Vulkan run |
+| Qwen3 4B Instruct | 1.98 tok/s | 1.58 tok/s | 1.46 tok/s | 6.39 tok/s | kernel reset timeout during run window |
+| Phi-4 Mini | 2.10 tok/s | 1.64 tok/s | 1.48 tok/s | 6.40 tok/s | i915 GPU hang during run window, process returned 0 |
+| Gemma 3 4B | 2.13 tok/s | 1.64 tok/s, derived text-only compatibility copy | GPU hang | not reported | preserved failure |
+| Qwen3 8B | 0.98 tok/s | 10-minute cap | 0.84 tok/s | 6.40 tok/s | i915 GPU hang during run window, process returned 0 |
 
-On this system, Vulkan made prompt processing much faster and reduced recorded package peaks to 53 to 61 C. Generation throughput improved only for the two smaller Qwen models, and was lower for the 4B-class models and Qwen3 8B. The GPU path allowed the 8B benchmark to complete where the CPU benchmark reached the 10-minute cap.
+Only Qwen3 0.6B and 1.7B completed without a matching kernel reset or hang. In those clean pairs, Vulkan prompt processing was 3.3 to 7 times the CPU microbenchmark, generation improved over CPU, and recorded package peaks were 26 to 27 C lower. The 1.7B Vulkan result also matched Ollama within measurement precision.
+
+The larger-model processes still wrote benchmark rows, but their run windows contain i915 failures. Qwen3 4B reached a reset request timeout. Phi-4 Mini and Qwen3 8B coincided with explicit GPU hangs even though `llama-bench` returned 0. The Qwen3 8B number is therefore a retained diagnostic observation, not evidence of a clean completion after the CPU time cap.
 
 ## Vulkan access and failure boundary
 
 Mesa ANV initially exposed only llvmpipe because the bench account could not access `/dev/dri/renderD128`. Adding the account to the existing `render` group allowed Intel UHD Graphics (Jasper Lake) to enumerate. No driver or safety-control change was made.
 
-Gemma 3 4B exposed two separate issues. The Ollama GGUF was an older multimodal conversion that current llama.cpp rejected. A local text-only compatibility copy added the missing epsilon metadata, padded the vocabulary row, and removed embedded vision tensors; it produced the CPU value above. The corresponding Vulkan run then ended with fence timeouts, an i915 preemption reset, and `vk::DeviceLostError`. The system recovered and the raw kernel excerpt is retained in `results/round2/gemma3-vulkan-devicelost-dmesg.txt`.
+The original runner enforced temperature and process timeouts, but it inspected the kernel summary only after the full Vulkan matrix. That implementation did not enforce the intended stop-on-reset rule. The corrected interpretation maps the telemetry windows to the retained kernel log and marks every affected row as unstable. No additional Vulkan or split-offload testing was attempted after this reconstruction.
+
+Gemma 3 4B exposed two separate issues. The Ollama GGUF was an older multimodal conversion that current llama.cpp rejected. A separate text-only compatibility copy added the missing epsilon metadata, padded the vocabulary row, and removed embedded vision tensors; it produced the CPU value above. The corresponding Vulkan run then ended with fence timeouts, an i915 preemption reset, and `vk::DeviceLostError`. It produced no valid prompt or generation score. The system recovered and the raw kernel excerpt is retained in `results/round2/gemma3-vulkan-devicelost-dmesg.txt`.
 
 The compatibility utility is retained as `scripts/patch_gemma3_gguf.py`. It creates a new output file and leaves the source GGUF unchanged. It is not a workaround for the Vulkan failure.
 
@@ -51,4 +55,5 @@ Each result is faster than the 1.824 to 1.995 tok/s 4B-class range measured in r
 - `results/round2/llama-bench.csv`: sanitized aggregated llama-bench rows.
 - `results/round2/new-models.tsv`: the requested-model observations.
 - `results/round2/gemma3-vulkan-devicelost-dmesg.txt`: kernel evidence for the recovered GPU failure.
+- `results/round2/vulkan-session-kernel-events.txt`: sanitized run-window mapping for the reset and GPU-hang events in the original Vulkan matrix.
 - `ROUND2_PROTOCOL.md`: exact boundaries, limitations, and a clean next-run checklist.

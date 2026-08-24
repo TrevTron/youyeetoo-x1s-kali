@@ -23,7 +23,9 @@ Kali's standard amd64 desktop, top-10 tools, and default tool collection install
 
 Local AI was useful within clear limits. In the first CPU-only matrix, Qwen3 0.6B was the fastest model tested, while Qwen3 1.7B felt like the more practical balance at 3.129 warm tokens per second. The 4B-class models stayed around 1.8 to 2.0 tokens per second. Qwen3 8B fit in memory and stopped naturally, but 0.924 tokens per second is patient, not interactive. A full-resolution Gemma 3 4B vision request produced no output before the fixed 20-minute cutoff.
 
-Round 2 adds the requested runtime and Vulkan work. It retains the exact Q4_K_M model blobs for the original six tags, reports Ollama request throughput beside llama.cpp `llama-bench` CPU and Vulkan throughput, and keeps the limits visible. These are not identical end-to-end harnesses: Ollama used the natural-language request while `llama-bench` used a synthetic 128-token prompt. Vulkan made prompt processing much faster and ran cooler, but did not consistently improve token generation on the shared-DDR4 iGPU. Qwen3 8B completed on Vulkan after the CPU microbenchmark reached its 10-minute cap. The Gemma 3 Vulkan attempt produced a recoverable i915 GPU hang, preserved here rather than edited away.
+Round 2 adds the requested runtime and Vulkan work. Five comparisons use the exact Q4_K_M model blobs behind the original Ollama tags. Gemma required a separate text-only compatibility copy for current llama.cpp. The report places Ollama request throughput beside llama.cpp `llama-bench` CPU and Vulkan throughput and keeps the harness limits visible. These are not identical end-to-end tests: Ollama used the natural-language request while `llama-bench` used a synthetic 128-token prompt. Qwen3 0.6B and 1.7B produced clean Vulkan gains with much faster prompt processing and lower package temperatures. The larger Vulkan rows are diagnostic only: Qwen3 4B reached a reset timeout, Phi-4 Mini and Qwen3 8B coincided with i915 GPU hangs despite zero process return codes, and Gemma 3 ended with `vk::DeviceLostError`.
+
+The audited community follow-up adds the two official Qwen3.5 requests. Qwen3.5 0.8B averaged 10.44 warm tokens per second and Qwen3.5 2B averaged 4.89 on their Q8_0 Ollama tags. Their recorded package peaks were 70 and 75 °C. The raw rows, output hashes, and exact model-blob digests are retained in [`FOLLOWUP_RESULTS.md`](FOLLOWUP_RESULTS.md) and `results/followup/`.
 
 ## Results at a glance
 
@@ -37,9 +39,9 @@ Round 2 adds the requested runtime and Vulkan work. It retains the exact Q4_K_M 
 | 4B text models | 1.824 to 1.995 warm tokens/s |
 | 8B text model | Fits in memory; 0.924 warm tokens/s |
 | Full-HD 4B vision | No output before the 20-minute cutoff |
-| Round 2 Vulkan prompt processing | 3.3 to 7 times the CPU microbenchmark, depending on model |
-| Round 2 Vulkan generation | Faster for Qwen3 0.6B, similar for 1.7B, lower for the tested 4B and 8B models |
-| Round 2 GPU failure | Gemma 3 4B caused a recoverable i915 reset and `vk::DeviceLostError`; no safety settings were changed |
+| Round 2 clean Vulkan runs | Qwen3 0.6B and 1.7B only; prompt processing was 3.3 to 7 times CPU, generation improved, and peaks were 26 to 27 °C lower |
+| Round 2 unstable Vulkan rows | Qwen3 4B reset timeout; Phi-4 Mini and Qwen3 8B GPU hangs despite return code 0; Gemma 3 `vk::DeviceLostError` |
+| Qwen3.5 follow-up | 0.8B at 10.44 warm tok/s; 2B at 4.89 warm tok/s; official Q8_0 Ollama tags |
 | Kali compatibility | 14/14 representative checks produced intended output |
 | Local security workflow | Nmap, Metasploit, Nikto, Gobuster, ffuf, SQLmap, and TShark completed together on loopback |
 
@@ -71,6 +73,14 @@ MAX_TEMP_C=85 DURATION=15m ./scripts/thermal_soak.sh
 
 # CPU-only Ollama model matrix
 MAX_TEMP_C=85 ./scripts/benchmark_ollama.sh
+
+# A selected Ollama candidate list with the same guarded runner
+MODEL_LIST='qwen3.5:0.8b qwen3.5:2b' MAX_TEMP_C=85 ./scripts/benchmark_ollama.sh
+
+# One llama.cpp CPU microbenchmark. GPU layers above zero additionally require
+# passwordless read access to the kernel journal and stop on the first i915 event.
+LLAMA_BENCH=$HOME/llama.cpp/build/bin/llama-bench \
+  ./scripts/benchmark_llama_cpp_guarded.sh /path/to/model.gguf cpu 0
 ```
 
 ## Repository map
@@ -78,9 +88,10 @@ MAX_TEMP_C=85 ./scripts/benchmark_ollama.sh
 - [`INSTALLATION.md`](INSTALLATION.md) covers the USB-installer-to-NVMe rebuild and first-attempt failure.
 - [`METHODOLOGY.md`](METHODOLOGY.md) defines the workloads, safeguards, and measurement boundaries.
 - [`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md) contains the inference, vision, idle, and thermal results.
-- [`ROUND2_RESULTS.md`](ROUND2_RESULTS.md) documents the Ollama, llama.cpp CPU, and Vulkan measurements, including the retained negative result.
+- [`ROUND2_RESULTS.md`](ROUND2_RESULTS.md) documents the Ollama, llama.cpp CPU, and Vulkan measurements, including every retained negative result and the corrected kernel-event timeline.
 - [`ROUND2_PROTOCOL.md`](ROUND2_PROTOCOL.md) records the completed method, its limits, and a clean same-request plan for the next pass.
 - [`CANDIDATE_MODEL_TABLE.md`](CANDIDATE_MODEL_TABLE.md) keeps completed measurements separate from models that need a clearly identified artifact and their own benchmark pass.
+- [`FOLLOWUP_RESULTS.md`](FOLLOWUP_RESULTS.md) adds the official Qwen3.5 0.8B and 2B measurements and records why the remaining requests are still separate.
 - [`KALI_TOOL_RESULTS.md`](KALI_TOOL_RESULTS.md) documents the compatibility matrix and integrated local workflow.
 - [`scripts/`](scripts/) contains the guarded collectors and test runners.
 - [`results/`](results/) contains selected JSON, CSV, command output, package inventory, health checks, and telemetry. [`results/round2/`](results/round2/) contains the sanitized round-2 summaries, model-blob digests, and GPU-hang evidence.

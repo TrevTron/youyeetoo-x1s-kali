@@ -1,0 +1,26 @@
+X1S Vulkan kernel-event mapping
+Date: 2026-08-21
+
+These events were retained in the original session master log and mapped to the
+per-model two-second telemetry windows during the 2026-08-23 audit. Times use
+the X1S local time zone. A zero llama-bench return code is not considered a
+clean result when its run window contains one of these events.
+
+Qwen3 4B Instruct window: 14:55:34 to 14:58:49
+Aug 21 14:58:01 x1s-kali kernel: i915 0000:00:02.0: [drm] *ERROR* GT0: rcs0 reset request timed out: {request: 00000001, RESET_CTL: 00000001}
+
+Phi-4 Mini window: 14:58:51 to 15:02:06
+Aug 21 15:01:35 x1s-kali kernel: i915 0000:00:02.0: [drm] Resetting rcs0 for preemption time out
+Aug 21 15:01:35 x1s-kali kernel: i915 0000:00:02.0: [drm] GPU HANG: ecode 11:1:85dffffa
+Aug 21 15:01:49 x1s-kali kernel: i915 0000:00:02.0: [drm] GPU HANG: ecode 11:0:00000000
+Aug 21 15:01:49 x1s-kali kernel: i915 0000:00:02.0: [drm] Resetting rcs0 for stopped heartbeat on rcs0
+
+Qwen3 8B window: 15:02:10 to 15:07:04
+Aug 21 15:03:56 x1s-kali kernel: i915 0000:00:02.0: [drm] Resetting rcs0 for preemption time out
+Aug 21 15:03:56 x1s-kali kernel: i915 0000:00:02.0: [drm] GPU HANG: ecode 11:1:85dffffa
+Aug 21 15:04:09 x1s-kali kernel: i915 0000:00:02.0: [drm] GPU HANG: ecode 11:0:00000000
+Aug 21 15:04:09 x1s-kali kernel: i915 0000:00:02.0: [drm] Resetting rcs0 for stopped heartbeat on rcs0
+
+The later Gemma 3 text-only compatibility run is documented separately in
+gemma3-vulkan-devicelost-dmesg.txt because it produced an explicit
+vk::DeviceLostError and a nonzero process result.

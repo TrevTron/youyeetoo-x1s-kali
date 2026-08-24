@@ -7,14 +7,18 @@ NUM_PREDICT="${NUM_PREDICT:-96}"
 NUM_CTX="${NUM_CTX:-4096}"
 API="${OLLAMA_HOST:-http://127.0.0.1:11434}"
 
-MODELS=(
-  "qwen3:0.6b"
-  "qwen3:1.7b"
-  "qwen3:4b-instruct"
-  "phi4-mini"
-  "gemma3:4b"
-  "qwen3:8b"
-)
+if [[ -n "${MODEL_LIST:-}" ]]; then
+  read -r -a MODELS <<< "$MODEL_LIST"
+else
+  MODELS=(
+    "qwen3:0.6b"
+    "qwen3:1.7b"
+    "qwen3:4b-instruct"
+    "phi4-mini"
+    "gemma3:4b"
+    "qwen3:8b"
+  )
+fi
 
 PROMPT='Without using markdown, explain in exactly four short sentences what CPU-only local language-model inference is. Mention quantization, tokens per second, memory, and temperature. Do not claim that this machine has a GPU.'
 
@@ -62,7 +66,7 @@ cpu_use() {
 }
 
 sampler() {
-  local model="$1" csv="$2" stop_file="$3"
+  local model="$1" csv="$2" stop_file="$3" request_pid="$4"
   printf '%s\n' 'timestamp,model,cpu_pct,load1,pkg_temp_c,nvme_temp_c,mem_available_mib,ollama_rss_mib' > "$csv"
   while [[ ! -e "$stop_file" ]]; do
     local now cpu load temp nvme_temp mem rss
@@ -77,7 +81,7 @@ sampler() {
     if [[ -n "$temp" ]] && awk -v t="$temp" -v max="$MAX_TEMP_C" 'BEGIN {exit !(t>=max)}'; then
       printf '%s THERMAL_ABORT model=%s package_temp_c=%s threshold_c=%s\n' "$now" "$model" "$temp" "$MAX_TEMP_C" | tee -a "$EVENTS"
       touch "$OUT_DIR/THERMAL_ABORT"
-      pkill -TERM -f "curl.*127.0.0.1:11434/api/generate" 2>/dev/null || true
+      kill -TERM "$request_pid" 2>/dev/null || true
       return
     fi
   done
@@ -116,9 +120,6 @@ for model in "${MODELS[@]}"; do
     telemetry="$OUT_DIR/${safe}-run${run}-telemetry.csv"
     response="$OUT_DIR/${safe}-run${run}.json"
     rm -f "$stop_file"
-    sampler "$model" "$telemetry" "$stop_file" &
-    sampler_pid=$!
-
     payload="$(jq -n \
       --arg model "$model" \
       --arg prompt "$PROMPT" \
@@ -126,9 +127,14 @@ for model in "${MODELS[@]}"; do
       --argjson predict "$NUM_PREDICT" \
       '{model:$model,prompt:$prompt,stream:false,think:false,keep_alive:"2m",options:{num_ctx:$ctx,num_predict:$predict,temperature:0,seed:42}}')"
 
-    if ! timeout 15m curl --fail --silent --show-error \
+    timeout 15m curl --fail --silent --show-error \
       -H 'Content-Type: application/json' \
-      --data-binary "$payload" "$API/api/generate" > "$response"; then
+      --data-binary "$payload" "$API/api/generate" > "$response" &
+    request_pid=$!
+    sampler "$model" "$telemetry" "$stop_file" "$request_pid" &
+    sampler_pid=$!
+
+    if ! wait "$request_pid"; then
       printf '%s REQUEST_FAILED model=%s run=%s\n' "$(date --iso-8601=seconds)" "$model" "$run" | tee -a "$EVENTS"
       touch "$stop_file"
       wait "$sampler_pid" 2>/dev/null || true

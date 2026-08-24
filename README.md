@@ -11,8 +11,6 @@ This repository contains the installation notes, scripts, selected raw evidence,
 
 ## Why I came back to this board
 
-My original microSD approach never became a reliable boot path, so the project sat unfinished. Youyeetoo later sent a 128 GB NVMe, which gave me a reason to rebuild the system properly and document the process from installation through sustained testing.
-
 The first USB installation still failed while reading its own source media. BusyBox reported a hash mismatch, followed by device-offline and ISOFS errors from the USB path. On the successful retry I changed two things: I moved the reader to a USB 3 port and used Kali's text installer. That gave me a working recovery path, although it does not isolate one definitive root cause.
 
 Once Kali booted from the internal NVMe, the X1S stopped being a storage project. I could finally test the questions that made the board interesting in the first place: thermals, normal x86 Kali tooling, and CPU-only local AI.

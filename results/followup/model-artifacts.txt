@@ -1,3 +1,6 @@
 # Ollama model blobs used for the 2026-08-23 Qwen3.5 follow-up
 qwen3.5:0.8b sha256-afb707b6b8fac6e475acc42bc8380fc0b8d2e0e4190be5a969fbf62fcc897db5 Q8_0 873.44M parameters
 qwen3.5:2b sha256-b709d81508a078a686961de6ca07a953b895d9b286c46e17f00fb267f4f2d297 Q8_0 2.3B parameters
+gemma4:e2b sha256-4e30e2665218745ef463f722c0bf86be0cab6ee676320f1cfadf91e989107448 Q4_K_M 5.1B total parameters, 2.3B effective
+gemma4:e4b sha256-4c27e0f5b5adf02ac956c7322bd2ee7636fe3f45a8512c9aba5385242cb6e09a Q4_K_M 8.0B parameters
+openbmb/BitCPM-CANN-1B-gguf bitcpm4-1b-tq2_0.gguf sha256-2394c15cbea2181b72bfb4215d8417d8d1f2f6214069da2d01fde32ce3b13fce TQ2_0 1.62B parameters Apache-2.0

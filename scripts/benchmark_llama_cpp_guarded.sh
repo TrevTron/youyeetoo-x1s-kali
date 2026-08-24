@@ -94,7 +94,7 @@ trap cleanup EXIT INT TERM
   printf 'prompt_tokens=%s\ngenerated_tokens=%s\nrepetitions=%s\nthreads=%s\n' "$PROMPT_TOKENS" "$GENERATED_TOKENS" "$REPETITIONS" "$THREADS"
   printf 'max_temp_c=%s\ntime_limit=%s\n' "$MAX_TEMP_C" "$TIME_LIMIT"
   sha256sum "$MODEL_PATH"
-  "$LLAMA_BENCH" --version 2>&1 | head -2
+  { "$LLAMA_BENCH" --version 2>&1 || true; } | sed -n '1,2p'
 } > "$OUT_DIR/environment.txt"
 
 if (( GPU_LAYERS > 0 )); then

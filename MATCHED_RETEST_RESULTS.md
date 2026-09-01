@@ -1,15 +1,14 @@
 # Youyeetoo X1S matched retest results
 
-Updated: 2026-08-31
+Updated: 2026-09-01
 
-Round 2 started with a simple question from my first LocalLLaMA thread: what
-happens if I build llama.cpp myself and use the N5095's Intel GPU?
+This project started with two practical questions: what happens if I build
+llama.cpp myself, and how far can the N5095's Intel GPU go through Vulkan?
 
-The answer needed more work than my first draft admitted. I initially compared
-an Ollama API request with a synthetic `llama-bench` job. Both sets of numbers
-were real, but they were not the same job. I deleted that Reddit post and reran
-the CPU comparison with the same prompt, GGUF, context, sampler, thread count,
-batch settings, and output length in both runtimes.
+The original Round 2 CPU rows used an Ollama API request and a synthetic
+`llama-bench` job. They remain valid measurements of those workloads, but they
+were not the same job. The matched retest uses the same prompt, GGUF, context,
+sampler, thread count, batch settings, and output length in both runtimes.
 
 The system under test was one open-bench Youyeetoo X1S with a Celeron N5095,
 16 GB RAM, the supplied heatsink and fan, Kali 2025.4, kernel
@@ -43,9 +42,8 @@ matched at 71 tokens for Qwen and 70 for Phi. Output was deterministic within
 each runtime. The runtimes did not produce identical greedy text, and that fact
 is retained in the parity record.
 
-This result is narrower than the deleted headline. On this board, with these
-four files and these controls, Ollama's bundled CPU runner reported higher
-internal generation throughput. This is not a universal Ollama-versus-llama.cpp
+On this board, with these four files and these controls, Ollama's bundled CPU
+runner reported higher internal generation throughput. This is not a universal Ollama-versus-llama.cpp
 rule. It is what Ollama 0.32.1 and source commit `9a286ac` did on this X1S.
 
 Ollama unloaded after each request while the standalone llama.cpp server stayed
@@ -102,12 +100,12 @@ overwrites the source file. The derived file completed a true-CPU pp128/tg96
 run at 2.172 prompt tok/s and 1.624 generation tok/s. That conversion is not a
 fix for the later GPU device loss.
 
-## Community follow-up
+## Additional model results
 
-The requests from the first thread now have their own audited result set. It
-includes Qwen3.5 0.8B, 2B, and 9B, Gemma 4 E2B and E4B, Ling-mini-2.0 IQ4_XS,
-Granite 4 Tiny-H, LFM2.5, Gemma 3n E2B, BitCPM-CANN 1B TQ2_0, and an MTP depth
-sweep. Models I could not identify or test cleanly remain listed as not run.
+The additional test set includes Qwen3.5 0.8B, 2B, and 9B, Gemma 4 E2B and
+E4B, Ling-mini-2.0 IQ4_XS, Granite 4 Tiny-H, LFM2.5, Gemma 3n E2B,
+BitCPM-CANN 1B TQ2_0, and an MTP depth sweep. Models I could not identify or
+test cleanly remain listed as not run.
 
 See [`FOLLOWUP_RESULTS.md`](FOLLOWUP_RESULTS.md),
 [`MTP_RESULTS.md`](MTP_RESULTS.md), and

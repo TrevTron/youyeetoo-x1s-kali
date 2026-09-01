@@ -1,10 +1,10 @@
 # MTP on the Celeron N5095
 
-Updated: 2026-08-31
+Updated: 2026-09-01
 
-A commenter asked whether Ollama's multi-token prediction path could give the
-newer Qwen3.5 and Gemma 4 models a useful speed boost on the X1S. I tested it
-instead of assuming the default draft depth was representative.
+I tested whether Ollama's multi-token prediction path could give the newer
+Qwen3.5 and Gemma 4 models a useful speed boost on the X1S. The sweep covers
+draft depths 1 through 4 instead of treating one default depth as representative.
 
 ## What I tested
 

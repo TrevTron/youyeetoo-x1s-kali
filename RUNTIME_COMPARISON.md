@@ -1,18 +1,17 @@
 # Matched Ollama and llama.cpp CPU comparison
 
-Updated: 2026-08-31
+Updated: 2026-09-01
 
 Ollama, llama.cpp, and Vulkan are not three versions of the same thing. Ollama
 is the application and model server I used day to day. llama.cpp is the
 standalone implementation I built and pinned for this test. Vulkan is a GPU
 backend I tested separately through llama.cpp.
 
-I deleted my first Round 2 Reddit post because I had treated two different jobs
-as a head-to-head runtime test. The saved measurements were real, but Ollama had
-answered my normal request while `llama-bench` had used a synthetic 128-token
-prompt. They also differed in output length, context handling, cache behavior,
-and timing path. Those old rows remain useful as historical measurements, but
-they cannot decide which CPU runtime was faster.
+The original Round 2 CPU rows came from two different jobs. Ollama answered a
+normal API request while `llama-bench` used a synthetic 128-token prompt. They
+also differed in output length, context handling, cache behavior, and timing
+path. Those rows remain useful as historical measurements, but they cannot
+decide which CPU runtime was faster.
 
 ## The build was not a mystery build
 
@@ -84,5 +83,5 @@ The full collector is
 [`scripts/benchmark_matched_runtime_guarded.sh`](scripts/benchmark_matched_runtime_guarded.sh).
 The public aggregate rows are in
 [`results/corrected/matched-runtime-summary.csv`](results/corrected/matched-runtime-summary.csv).
-The retained evidence manifest covers the request bodies, responses, artifact
+The private evidence manifest covers the request bodies, responses, artifact
 hashes, parity checks, environment record, telemetry, and kernel windows.

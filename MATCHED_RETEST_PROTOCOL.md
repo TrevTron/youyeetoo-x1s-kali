@@ -141,7 +141,7 @@ The first Round 2 CPU matrix used exact matching GGUFs but not the same job.
 Ollama answered a natural-language request, while `llama-bench` used a synthetic
 128-token prompt. Output length, context handling, cache behavior, repetitions,
 and timing path differed. Those rows are historical measurements only. They do
-not support the deleted Reddit headline or a runtime winner.
+not support a runtime winner claim.
 
 The corrected comparison is documented in
 [`RUNTIME_COMPARISON.md`](RUNTIME_COMPARISON.md).

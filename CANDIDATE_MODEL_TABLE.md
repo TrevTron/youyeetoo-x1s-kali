@@ -1,14 +1,14 @@
-# Community model request status
+# Additional model status
 
-Updated: 2026-08-31
+Updated: 2026-09-01
 
-This table answers the model requests from the original LocalLLaMA thread. It
+This table tracks the additional model candidates considered for the X1S. It
 is not a quality ranking. Rows with different prompts, runtimes, or
 quantizations are not treated as a head-to-head model comparison.
 
 ## Completed
 
-| Requested model | Exact artifact used | Measured outcome |
+| Model | Exact artifact used | Measured outcome |
 | --- | --- | --- |
 | Qwen3.5 0.8B | Official Ollama Q8_0 tag | 10.44 tok/s in the original warm pair; 11.16 tok/s across the five MTP-off control prompts |
 | Qwen3.5 2B | Official Ollama Q8_0 tag | 4.89 tok/s in the original warm pair; 5.12 tok/s across the five MTP-off control prompts |

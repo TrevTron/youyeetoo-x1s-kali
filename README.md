@@ -14,8 +14,8 @@ stage it reported:
   covers the NVMe installation, thermals, Kali tools, loopback lab, and first
   CPU-only model pass.
 - [Youyeetoo X1S Round 2: Ollama, llama.cpp, and Intel Vulkan](https://unland.dev/blog/youyeetoo-x1s-ollama-llamacpp-vulkan-benchmarks)
-  covers the first from-source llama.cpp, Vulkan, and requested-model pass,
-  including the later correction that its CPU jobs were not matched.
+  covers the first from-source llama.cpp, Vulkan, and additional-model pass.
+  Its CPU rows came from separate harnesses and remain historical observations.
 - [I Reran Ollama vs llama.cpp on the Youyeetoo X1S](https://unland.dev/blog/youyeetoo-x1s-ollama-llamacpp-matched-retest)
   is the new matched retest: same-prompt CPU results, explicit device modes,
   Ling-mini, Qwen3.5 9B, MTP depths 1 through 4, and compatibility reruns.
@@ -33,11 +33,12 @@ stage it reported:
 The security workflow only targets a deliberately vulnerable service bound to
 `127.0.0.1`. It does not scan or attack a third-party system.
 
-## Corrected Ollama and llama.cpp CPU comparison
+## Matched Ollama and llama.cpp CPU comparison
 
-My first Round 2 draft compared an Ollama API request with a synthetic
-`llama-bench` job. Those were real measurements, but not a fair head-to-head
-test. I reran the comparison with the same raw prompt, content-addressed GGUF,
+The original Round 2 CPU rows used two different test paths: an Ollama API
+request and a synthetic `llama-bench` job. They remain valid measurements of
+their own workloads, but they were not a head-to-head runtime test. The matched
+retest uses the same raw prompt, content-addressed GGUF,
 4,096-token context, four threads, batch and microbatch 512, deterministic
 sampler, disabled prompt-cache reuse, and exactly 96 generated tokens.
 
@@ -81,9 +82,9 @@ and `vk::DeviceLostError`. The kernel recovered each time. I did not disable
 the watchdog or forced-timeout recovery, and I stopped before a larger split
 matrix. See [`MATCHED_RETEST_RESULTS.md`](MATCHED_RETEST_RESULTS.md).
 
-## Community-requested models
+## Additional model results
 
-| Request | Audited result |
+| Model | Audited result |
 | --- | --- |
 | Qwen3.5 0.8B Q8_0 | 10.44 warm tok/s |
 | Qwen3.5 2B Q8_0 | 4.89 warm tok/s |
@@ -161,10 +162,11 @@ enabled.
   protocol and its known limits.
 - [`MATCHED_RETEST_PROTOCOL.md`](MATCHED_RETEST_PROTOCOL.md) freezes the new
   matched retest protocol.
-- [`CANDIDATE_MODEL_TABLE.md`](CANDIDATE_MODEL_TABLE.md) lists completed and
-  untested community requests.
-- [`results/corrected/`](results/corrected/) contains public aggregate rows and
-  evidence-manifest hashes.
+- [`CANDIDATE_MODEL_TABLE.md`](CANDIDATE_MODEL_TABLE.md) tracks completed and
+  untested model candidates.
+- [`results/corrected/`](results/corrected/) contains public aggregate CSVs,
+  artifact hashes, and the Ling-mini evidence-manifest hash. The other
+  run-level manifests remain in the private lab.
 - [`results/round2/`](results/round2/) contains sanitized original Round 2 rows
   and GPU-hang evidence.
 - [`scripts/`](scripts/) contains the guarded collectors and conversion tools.

@@ -1,0 +1,3 @@
+model,depth,phase,thermal_limit_c,exit_code,thermal_abort,kernel_error,outcome
+gemma4-e2b,2,measured_request,85,143,1,0,stopped_at_guard
+gemma4-e2b,3,warmup,85,143,1,0,stopped_at_guard

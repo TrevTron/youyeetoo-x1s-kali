@@ -1,0 +1,13 @@
+model,depth,repetitions,thermal_limit_c,off_generation_tps,on_generation_tps,delta_percent,off_peak_c,on_peak_c,generated_tokens_match,output_hash_match,status
+gemma4-e2b,1,1,85,3.269132,2.266096,-30.68,80,84,1,1,clean
+gemma4-e2b,2,1,90,3.358632,1.960344,-41.63,80,84,1,1,clean_after_85c_abort
+gemma4-e2b,3,1,90,3.352104,1.473966,-56.03,82,86,1,1,clean_after_85c_abort
+gemma4-e2b,4,5,85,3.396947,1.333254,-60.75,81,84,1,1,clean
+qwen35-0.8b,1,1,85,11.342784,6.042707,-46.73,74,75,1,1,clean
+qwen35-0.8b,2,1,85,11.493500,4.019269,-65.03,77,79,1,1,clean
+qwen35-0.8b,3,1,85,11.213736,3.133245,-72.06,76,77,1,1,clean
+qwen35-0.8b,4,5,85,11.157070,2.623625,-76.48,78,79,1,1,clean
+qwen35-2b,1,1,85,4.890794,3.777882,-22.76,78,77,1,1,clean
+qwen35-2b,2,1,85,5.154352,2.852815,-44.65,79,79,1,1,clean
+qwen35-2b,3,1,85,4.853154,2.598873,-46.45,80,80,1,1,clean
+qwen35-2b,4,5,85,5.121394,1.521997,-70.28,80,79,1,1,clean

@@ -1,22 +1,35 @@
-# Follow-up model candidates
+# Community model request status
 
-This is a planning table, not a benchmark claim. The board has 16 GB installed RAM and limited NVMe capacity. Any new model download or device benchmark requires a separate approval.
+Updated: 2026-08-31
 
-| Candidate | Status in round 2 | Next requirement |
+This table answers the model requests from the original LocalLLaMA thread. It
+is not a quality ranking. Rows with different prompts, runtimes, or
+quantizations are not treated as a head-to-head model comparison.
+
+## Completed
+
+| Requested model | Exact artifact used | Measured outcome |
 | --- | --- | --- |
-| Gemma 3n E2B | Measured as `gemma3n:e2b`, 3.24 tok/s | Pin digest before rerunning; this is not Gemma 4 E2B |
-| Gemma 4 E2B | Measured as official Ollama Q4_K_M tag, 3.38 tok/s warm average | Completed; blob digest and raw rows retained |
-| Gemma 4 E4B | Measured as official Ollama Q4_K_M tag, 1.78 tok/s warm average | Completed; blob digest and raw rows retained |
-| Granite 4 Tiny-H, 7B-A1B | Measured as `granite4:tiny-h`, 5.43 tok/s | Repeat with a pinned digest |
-| Granite 4 Micro-H | Not measured | Pull only after approval |
-| LFM2.5 | Measured as `lfm2.5:latest`, 4.95 tok/s | Identify and pin the exact variant |
-| Qwen3.5 0.8B | Measured as official Ollama Q8_0 tag, 10.44 tok/s warm average | Completed; blob digest and raw rows retained |
-| Qwen3.5 2B | Measured as official Ollama Q8_0 tag, 4.89 tok/s warm average | Completed; blob digest and raw rows retained |
-| Ling-mini-2.0 IQ4_XS | Not measured | Manual GGUF source, license, hash, and fit check |
-| BitCPM-CANN 1B TQ2_0 | llama.cpp CPU: 13.30 prompt tok/s and 8.63 generation tok/s | Official Apache-2.0 GGUF; Ollama 0.32.1 rejected the same file with a tensor size overflow |
-| BitCPM ternary 8B | Not measured | Separate 2.4 GB artifact; do not infer its performance from the 1B-class result |
-| Stitched-Qwen MoE | Not measured | Identify a maintained artifact and record active-parameter behavior |
-| Nanbeige4.1 3B | Not measured | Pin one licensed Q4 artifact before pulling |
-| Awa 1.5B | Not measured | Identify the exact requested repository and supported artifact |
+| Qwen3.5 0.8B | Official Ollama Q8_0 tag | 10.44 tok/s in the original warm pair; 11.16 tok/s across the five MTP-off control prompts |
+| Qwen3.5 2B | Official Ollama Q8_0 tag | 4.89 tok/s in the original warm pair; 5.12 tok/s across the five MTP-off control prompts |
+| Qwen3.5 9B | Official Ollama Q4_K_M tag, blob SHA-256 `dec52a44569a2a25341c4e4d3fee25846eed4f6f0b936278e3a3c900bb99d37c` | 1.110 tok/s five-prompt average, 82 C maximum |
+| Gemma 4 E2B | Official Ollama Q4_K_M tag | 3.38 tok/s in the original warm pair; MTP depths 1 through 4 were all slower than MTP off |
+| Gemma 4 E4B | Official Ollama Q4_K_M tag | 1.78 tok/s original warm average |
+| Ling-mini-2.0 IQ4_XS | Bartowski revision `8be84a0f472797118167aac86b56ca903561a73b`, SHA-256 `a72d86d4cb4fedd940e34c08d008bb5cda42db80ce5c6bc5f9494e854a3d742d` | 4.083 generation tok/s at four threads, pp128/tg96, five repetitions; 85 C peak under the disclosed 90 C guard |
+| Granite 4 Tiny-H | Ollama tag used during the original follow-up | 5.43 tok/s single observation |
+| LFM2.5 | Mutable `lfm2.5:latest` tag used during the original follow-up | 4.95 tok/s single observation; the tag was not content-pinned in that pass |
+| Gemma 3n E2B | `gemma3n:e2b` | 3.24 tok/s single observation; this is not Gemma 4 E2B |
+| BitCPM-CANN 1B TQ2_0 | Official OpenBMB GGUF, SHA-256 `2394c15cbea2181b72bfb4215d8417d8d1f2f6214069da2d01fde32ce3b13fce` | Ollama 0.32.1 rejected the file with a tensor-size overflow; true-CPU llama.cpp measured 13.013 prompt and 8.584 generation tok/s, 76 C peak |
 
-Do not rank model quality from the round-2 throughput observations. The study did not include a task-quality evaluation.
+## Not run
+
+The following suggestions did not receive a trustworthy result in this round:
+
+- Granite 4 Micro-H
+- BitCPM ternary 8B
+- stitched-Qwen MoE variants
+- Nanbeige4.1 3B
+- Awa 1.5B
+
+They are listed so the original requests are not silently erased. No
+performance or compatibility claim is made for them.

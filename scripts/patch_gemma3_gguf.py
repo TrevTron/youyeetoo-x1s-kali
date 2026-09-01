@@ -22,6 +22,15 @@ src = Path(sys.argv[1])
 dst = Path(sys.argv[2])
 epsilon_key = 'gemma3.attention.layer_norm_rms_epsilon'
 
+if not src.is_file():
+    raise SystemExit(f'source GGUF is not a readable file: {src}')
+if src.resolve() == dst.resolve():
+    raise SystemExit('source and output paths must be different')
+if dst.exists():
+    raise SystemExit(f'refusing to overwrite existing output: {dst}')
+if not dst.parent.is_dir():
+    raise SystemExit(f'output directory does not exist: {dst.parent}')
+
 reader = gguf.GGUFReader(str(src))
 architecture = reader.get_field(gguf.Keys.General.ARCHITECTURE).contents()
 

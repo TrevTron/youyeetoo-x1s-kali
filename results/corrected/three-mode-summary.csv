@@ -1,0 +1,7 @@
+model,mode,prompt_tps,generation_tps,repetitions,peak_package_c,status
+qwen3-0.6b,pure-cpu,10.665698,7.396956,5,81,clean
+qwen3-0.6b,mixed-host-op,34.585991,7.424590,5,80,clean
+qwen3-0.6b,full-vulkan,37.350457,8.593448,5,57,clean
+qwen3-1.7b,pure-cpu,3.892534,2.986306,5,84,clean
+qwen3-1.7b,mixed-host-op,12.365896,2.997318,5,83,clean
+qwen3-1.7b,full-vulkan,12.879316,3.462355,5,58,clean

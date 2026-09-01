@@ -2,20 +2,27 @@
 
 Date: 2026-08-21, with the Gemma compatibility investigation completed on 2026-08-23.
 
-This is a measurement report for one open-bench Youyeetoo X1S: Celeron N5095 (4 cores and 4 threads, SSE4.2, no AVX, AVX2, F16C, or BMI2), 16 GB installed RAM, Kali 2025.4, Mesa 25.2.6, Ollama 0.32.1, and llama.cpp commit `9a286ac`, recorded at test time as built locally with an SSE4.2 CPU baseline and Vulkan enabled. The exact CMake invocation and cache were not retained. The supplied heatsink and active fan were fitted. Ambient temperature and wall power were not instrumented.
+This file stays with the measurements behind the published Round 2 article. It
+does not contain the later matched runtime, explicit device-mode, Ling-mini, or
+MTP retests. Those are in
+[`MATCHED_RETEST_RESULTS.md`](MATCHED_RETEST_RESULTS.md). The separation is
+intentional so the new work does not rewrite the earlier round.
+
+This is a measurement report for one open-bench Youyeetoo X1S: Celeron N5095 (4 cores and 4 threads, SSE4.2, no AVX, AVX2, F16C, or BMI2), 16 GB installed RAM, Kali 2025.4, Mesa 25.2.6, Ollama 0.32.1, and llama.cpp commit `9a286ac`, recorded at test time as built locally with an SSE4.2 CPU baseline and Vulkan enabled. The original public package did not include the CMake invocation or cache. The private record was later recovered and audited for the matched retest. The supplied heatsink and active fan were fitted. Ambient temperature and wall power were not instrumented.
 
 ## What matches, and what does not
 
 Five original tags use the exact Q4_K_M GGUF blobs recorded in `results/round2/ollama-blob-map.txt`. That verifies the model artifacts, not a fair runtime comparison. Gemma required a separate derived text-only compatibility copy for llama.cpp. Ollama used the original deterministic request with a 96-token cap, temperature 0, seed 42, and a 4,096-token context. Its observed prompt counts ranged from 45 to 58 tokens. Qwen3 0.6B, 1.7B, and 8B stopped naturally after 54, 56, and 84 generated tokens. llama.cpp used `llama-bench` with a synthetic 128-token prompt and a fixed 96-token generation workload, four threads, and two repetitions. The main llama.cpp matrix did not explicitly pass the same 4,096-token context.
 
-Five model blobs align. The actual prompt lengths, generated-token counts, harness, and explicitly recorded context do not. The Ollama and llama.cpp CPU figures below are separate generation-throughput observations. They do not establish that either runtime is faster. A winner claim requires the clean same-request protocol in `ROUND2_PROTOCOL.md`.
+Five model blobs align. The actual prompt lengths, generated-token counts, harness, and explicitly recorded context do not. The Ollama and llama.cpp CPU figures below are separate generation-throughput observations. They do not establish that either runtime is faster. The later clean same-request result is in [`RUNTIME_COMPARISON.md`](RUNTIME_COMPARISON.md).
 
 Correction, 2026-08-24: an earlier summary treated the first four completed CPU rows as a direct runtime comparison. That interpretation was too strong and has been removed. The raw measurements have not changed.
 
-The retained package identifies the llama.cpp commit and reported CPU baseline,
-but it does not include the original CMake invocation, CMake cache, or complete
-build log. The build configuration therefore cannot be independently reproduced
-or ruled out as a source of performance difference from this package alone.
+The Round 2 public package identified the llama.cpp commit and reported CPU
+baseline but did not include the CMake invocation, cache, or complete build log.
+The private recipe was recovered during the retest. It was a Release/O3,
+OpenMP, SSE4.2, Vulkan build with conservative `GGML_NATIVE=OFF`, not a debug or
+unoptimized build.
 
 Temperature sampling was every two seconds. The stop rules were an 85 C package-temperature guard and a 10-minute per-run cap. No GPU timeout, watchdog, driver, firmware, or kernel safety setting was weakened.
 

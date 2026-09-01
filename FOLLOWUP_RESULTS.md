@@ -1,65 +1,96 @@
 # X1S community follow-up results
 
-Date: 2026-08-23
+Updated: 2026-08-31
 
-These are CPU Ollama measurements added after the round-2 evidence audit. They
-use the same natural-language prompt, 4,096-token context, 96-token generation
-cap, temperature 0, seed 42, and 85 C package-temperature guard as the round-2
-Ollama rerun. Each model received one cold request followed by two warm
-requests. The published warm figure is the arithmetic mean of runs 2 and 3.
+These are the model requests I could answer cleanly after the first X1S post.
+I kept unlike prompts, runtimes, and quantizations out of one fake leaderboard.
+The table tells you what each number actually is.
 
-## Official candidate results
+## Official Ollama model runs
 
-| Official Ollama tag | Quantization | Cold generation | Warm run 2 | Warm run 3 | Warm average | Peak package |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `qwen3.5:0.8b` | Q8_0 | 10.43 tok/s | 10.37 tok/s | 10.51 tok/s | 10.44 tok/s | 70 C |
-| `qwen3.5:2b` | Q8_0 | 4.97 tok/s | 4.91 tok/s | 4.87 tok/s | 4.89 tok/s | 75 C |
-| `gemma4:e2b` | Q4_K_M | 3.36 tok/s | 3.38 tok/s | 3.38 tok/s | 3.38 tok/s | 77 C |
-| `gemma4:e4b` | Q4_K_M | 1.78 tok/s | 1.78 tok/s | 1.78 tok/s | 1.78 tok/s | 78 C |
+The first four rows used one cold request followed by two warm requests with the
+same natural-language prompt, 4,096-token context, 96-token cap, temperature 0,
+seed 42, and standard 85 C guard. The Qwen3.5 9B row used five controlled
+prompts and is reported separately as their average.
 
-The response hash was identical across all three requests for each model. Gemma
-4 E2B and E4B stopped naturally after 66 and 82 generated tokens; the Qwen
-requests reached the 96-token cap. The 0.8B tag is the fastest text-generation
-result measured in this X1S work. That does not make it a quality winner. These
-are throughput measurements, and the Q8_0 Qwen weights are not a
-quantization-matched comparison with every older tag.
+| Official tag | Quantization | Published generation rate | Peak package | What the number means |
+| --- | --- | ---: | ---: | --- |
+| `qwen3.5:0.8b` | Q8_0 | 10.44 tok/s | 70 C | Average of warm requests 2 and 3 |
+| `qwen3.5:2b` | Q8_0 | 4.89 tok/s | 75 C | Average of warm requests 2 and 3 |
+| `gemma4:e2b` | Q4_K_M | 3.38 tok/s | 77 C | Average of warm requests 2 and 3 |
+| `gemma4:e4b` | Q4_K_M | 1.78 tok/s | 78 C | Average of warm requests 2 and 3 |
+| `qwen3.5:9b` | Q4_K_M | 1.110 tok/s | 82 C | Five-prompt average, no MTP |
 
-Raw per-run timings and response hashes are in
-`results/followup/official-candidates-ollama.csv`. The exact Ollama model blob digests are
-in `results/followup/model-artifacts.txt`.
+The response was deterministic across the three requests for each of the first
+four models. The 0.8B tag is the fastest text-generation result in this X1S
+work, but throughput does not answer which model gives the best response.
 
-## BitCPM runtime compatibility result
+## Ling-mini-2.0 IQ4_XS
 
-I also tested OpenBMB's official Apache-2.0
-[`bitcpm4-1b-tq2_0.gguf`](https://huggingface.co/openbmb/BitCPM-CANN-1B-gguf).
-Ollama 0.32.1 downloaded and verified the file, but rejected it before inference
-with `tensor "blk.0.attn_k.weight" size overflow`. The same file loaded in
-llama.cpp commit `9a286ac` with CPU execution and zero GPU layers.
+I used the exact file requested in the thread: Bartowski's IQ4_XS quantization
+from revision `8be84a0f472797118167aac86b56ca903561a73b`. The 8,803,304,640-byte GGUF
+has SHA-256
+`a72d86d4cb4fedd940e34c08d008bb5cda42db80ce5c6bc5f9494e854a3d742d`.
 
-| Runtime and method | Prompt processing | Generation | Peak package | Status |
-| --- | ---: | ---: | ---: | --- |
-| llama.cpp, 128 prompt tokens, 96 generated tokens, 2 repetitions | 13.30 tok/s | 8.63 tok/s | 68 C | Clean |
-| Ollama 0.32.1 | Not run | Not run | Not applicable | Model-load failure |
+| Threads | Prompt processing | Generation | Peak package | Guard | Result |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 3 | 4.375 tok/s | 3.091 tok/s | 74 C | 85 C | Clean, five repetitions |
+| 4 | 5.817 tok/s | 4.083 tok/s | 85 C | 90 C | Clean, five repetitions |
 
-llama.cpp reported 1.62B parameters and identified the 550 MB artifact as
-TQ2_0 at 2.06 bits per weight. This is a llama.cpp microbenchmark, not the
-natural-language Ollama request used in the table above, so it belongs as a
-separate compatibility and throughput result. The sanitized raw row is in
-`results/followup/bitcpm-1b-tq2_0-llamacpp.csv`.
+The first four-thread attempt stopped at the standard 85 C guard. I repeated
+only that missing setting with a 90 C abort, a 5.9% increase. It completed at
+an 85 C sampled peak with a clean
+kernel window. The timeout and kernel-error checks were unchanged. The
+four-thread result is 32.1% faster in generation than the clean three-thread
+row, so it is the selected Ling result.
 
-## What is still untested
+## MTP did not help this N5095
 
-- Gemma 4 E2B and E4B are now measured separately. E2B is different from the
-  earlier `gemma3n:e2b` result.
-- Split Vulkan offload was not run after the audit reconstructed i915 resets
-  and hangs in the larger full-offload rows. The safety boundary takes priority.
-- The Ling-mini-2.0 IQ4_XS file I found is an 8.8 GB third-party quantization.
-  I did not have enough verified provenance and testing time to include it.
-- BitCPM 1B TQ2_0 is now tested in llama.cpp. The 8B artifact remains separate.
-  A stitched-Qwen MoE and Awa still need an exact maintained artifact, license,
-  and runtime-support check before a benchmark claim.
-- A matched N100, Raspberry Pi 5, and Nova comparison still requires the same
-  model artifact and method on each physical board.
+I tested draft depths 1 through 4 on Qwen3.5 0.8B, Qwen3.5 2B, and Gemma 4 E2B.
+The collector explicitly disabled thinking, verified Ollama's `draft-mtp`
+runner and nonzero draft tokens in the service journal, and required matching
+token counts and output hashes between MTP off and on.
 
-I am leaving these gaps visible because they need their own artifacts, hardware,
-or test pass before they can support a benchmark claim.
+Every tested depth was slower with MTP enabled. Depth 1 was the least costly,
+but it still reduced generation throughput by 46.7% on Qwen3.5 0.8B, 22.8% on
+Qwen3.5 2B, and 30.7% on Gemma 4 E2B. Increasing the draft depth made the loss
+larger. The full table and method are in [`MTP_RESULTS.md`](MTP_RESULTS.md).
+
+This is an N5095 result for Ollama 0.32.1 and these artifacts. It is not a claim
+that MTP is useless on newer CPUs or GPUs.
+
+## BitCPM and Gemma 3 compatibility
+
+OpenBMB's official `bitcpm4-1b-tq2_0.gguf` has SHA-256
+`2394c15cbea2181b72bfb4215d8417d8d1f2f6214069da2d01fde32ce3b13fce`.
+Ollama 0.32.1 rejected it before inference with a tensor-size overflow. The same
+file completed a true-CPU llama.cpp pp128/tg96 test at 13.013 prompt tok/s and
+8.584 generation tok/s, with five repetitions and a 76 C peak.
+
+The older Gemma 3 Ollama artifact required a separate text-only compatibility
+copy before current llama.cpp would load it. The original file was left
+untouched. The derived copy has SHA-256
+`510408e8043ca1c741fe9a16088d47e8fa0d016033c6acf0c50c50c7c93b6530`
+and completed the same true-CPU workload at 2.172 prompt tok/s and 1.624
+generation tok/s, with five repetitions and an 81 C peak. That patch is a model
+conversion aid, not a Vulkan fix.
+
+## Earlier requested-model observations
+
+These single Ollama observations came from the first follow-up pass:
+
+| Model | Generation | Peak package | Note |
+| --- | ---: | ---: | --- |
+| Granite 4 Tiny-H | 5.43 tok/s | 79 C | Ollama tag used during the pass |
+| LFM2.5 | 4.95 tok/s | 80 C | Mutable `latest` tag was not content-pinned |
+| Gemma 3n E2B | 3.24 tok/s | 80 C | This is not Gemma 4 E2B |
+
+## Requests I did not turn into claims
+
+I did not produce trustworthy measurements for Granite 4 Micro-H, BitCPM
+ternary 8B, stitched-Qwen MoE variants, Nanbeige4.1 3B, or Awa 1.5B. A matched
+N100, N150, Raspberry Pi 5, or IndieDroid Nova comparison also still needs the
+same artifact and method on each physical board.
+
+Those gaps are listed in [`CANDIDATE_MODEL_TABLE.md`](CANDIDATE_MODEL_TABLE.md)
+instead of being filled with guesses.
